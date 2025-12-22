@@ -1,6 +1,9 @@
 import { motion } from "framer-motion";
-import { ComputersCanvas } from "../components/canvas/index.js";
+import { lazy, Suspense } from "react";
 import { AnimatedBackground } from "../components";
+
+
+const ComputersCanvas = lazy(() => import("../components/canvas/desktop"));
 
 const Hero = () => {
   const textVariants = {
@@ -49,7 +52,9 @@ const Hero = () => {
       </div>
 
       <div className="absolute inset-0">
-        <ComputersCanvas />
+        <Suspense fallback={null}>
+          <ComputersCanvas />
+        </Suspense>
       </div>
 
       <div className="absolute bottom-24 w-full flex justify-center items-center lg:hidden">

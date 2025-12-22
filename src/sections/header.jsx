@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from "framer-motion";
 
 import { staggerContainer, fadeIn, zoomIn } from "../utils/motion";
 import { navLinks } from "../constants";
-import { menu, close } from "../assets";
 import { ContactForm } from "../components";
 
 const socialLinks = [
@@ -97,11 +96,10 @@ const Header = () => {
           damping: 25,
           duration: 1,
         }}
-        className={`sm:px-16 px-6 w-full flex items-center py-5 fixed top-0 z-50 ${
-          scrolled
-            ? "bg-black/90 shadow-md border-b border-purple-700 backdrop-blur-md"
-            : "bg-black/90"
-        }`}
+        className={`sm:px-16 px-6 w-full flex items-center py-5 fixed top-0 z-50 ${scrolled
+          ? "bg-black/90 shadow-md border-b border-purple-700 backdrop-blur-md"
+          : "bg-black/90"
+          }`}
       >
         <div className="w-full flex justify-between items-center max-w-7xl mx-auto">
           <Link
@@ -130,9 +128,8 @@ const Header = () => {
               <motion.li
                 key={nav.id}
                 variants={fadeIn("down", "spring", 0.2 * index, 0.75)}
-                className={`text-[18px] font-medium cursor-pointer relative group hover:text-purple-100 ${
-                  active === nav.title ? "text-white" : "text-gray-300"
-                }`}
+                className={`text-[18px] font-medium cursor-pointer relative group hover:text-purple-100 ${active === nav.title ? "text-white" : "text-gray-300"
+                  }`}
               >
                 <a
                   href={`#${nav.id}`}
@@ -144,9 +141,8 @@ const Header = () => {
                 >
                   {nav.title}
                   <span
-                    className={`absolute left-0 -bottom-1 h-[2px] bg-purple-500 transition-all duration-300 ${
-                      active === nav.title ? "w-full" : "w-0 group-hover:w-full"
-                    }`}
+                    className={`absolute left-0 -bottom-1 h-[2px] bg-purple-500 transition-all duration-300 ${active === nav.title ? "w-full" : "w-0 group-hover:w-full"
+                      }`}
                   ></span>
                 </a>
               </motion.li>
@@ -181,15 +177,26 @@ const Header = () => {
           </motion.div>
 
           <div className="md:hidden flex justify-end items-center relative z-50">
-            {!toggle && (
-              <motion.img
-                whileTap={{ scale: 0.8 }}
-                src={menu}
-                alt="menu"
-                className="w-[28px] h-[28px] object-contain cursor-pointer"
-                onClick={() => setToggle(true)}
+            <button
+              onClick={() => setToggle(!toggle)}
+              className="flex flex-col justify-center items-center w-[28px] h-[28px] gap-[6px] focus:outline-none bg-transparent relative z-50"
+            >
+              <motion.span
+                className="w-full h-[3px] bg-white rounded-lg origin-center"
+                animate={toggle ? { rotate: 45, y: 9 } : { rotate: 0, y: 0 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
               />
-            )}
+              <motion.span
+                className="w-full h-[3px] bg-white rounded-lg"
+                animate={toggle ? { opacity: 0 } : { opacity: 1 }}
+                transition={{ duration: 0.2 }}
+              />
+              <motion.span
+                className="w-full h-[3px] bg-white rounded-lg origin-center"
+                animate={toggle ? { rotate: -45, y: -9 } : { rotate: 0, y: 0 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              />
+            </button>
             <AnimatePresence>
               {toggle && (
                 <motion.div
@@ -198,16 +205,8 @@ const Header = () => {
                   initial="hidden"
                   animate="visible"
                   exit="exit"
-                  className="fixed top-0 left-0 w-full h-screen bg-black backdrop-blur-md flex flex-col items-center justify-center gap-8 z-40"
+                  className="fixed top-0 left-0 w-full h-screen bg-black/95 backdrop-blur-xl flex flex-col items-center justify-center gap-8 z-40"
                 >
-                  <motion.img
-                    whileTap={{ scale: 0.8 }}
-                    src={close}
-                    alt="close"
-                    onClick={() => setToggle(false)}
-                    className="absolute top-6 right-6 w-[28px] h-[28px] object-contain cursor-pointer hover:rotate-90 transition-transform duration-300"
-                  />
-
                   <motion.ul
                     className="flex flex-col items-center gap-6 list-none"
                     variants={staggerContainer(0.15, 0.2)}
@@ -216,9 +215,8 @@ const Header = () => {
                   >
                     <motion.li
                       variants={fadeIn("down", "spring", 0, 0.5)}
-                      className={`text-[20px] font-medium cursor-pointer ${
-                        active === "Home" ? "text-white" : "text-gray-400"
-                      } hover:text-teal-400 transition-colors duration-300`}
+                      className={`text-[20px] font-medium cursor-pointer ${active === "Home" ? "text-white" : "text-gray-400"
+                        } hover:text-teal-400 transition-colors duration-300`}
                       onClick={(e) => {
                         e.preventDefault();
                         handleNavClick("home");
@@ -235,9 +233,8 @@ const Header = () => {
                           0.1 * (index + 1),
                           0.5
                         )}
-                        className={`text-[20px] font-medium cursor-pointer ${
-                          active === nav.title ? "text-white" : "text-gray-400"
-                        } hover:text-teal-400 transition-colors duration-300`}
+                        className={`text-[20px] font-medium cursor-pointer ${active === nav.title ? "text-white" : "text-gray-400"
+                          } hover:text-teal-400 transition-colors duration-300`}
                         onClick={(e) => {
                           e.preventDefault();
                           handleNavClick(nav.id);

@@ -1,14 +1,13 @@
 import { BrowserRouter } from "react-router-dom";
-import {
-  Header,
-  Hero,
-  About,
-  Skills,
-  Projects,
-  Contact,
-  Footer,
-} from "./sections";
+import { lazy, Suspense } from "react";
+import { Header, Hero } from "./sections";
 import { Cursor } from "./components";
+
+const About = lazy(() => import("./sections/about"));
+const Skills = lazy(() => import("./sections/skills"));
+const Projects = lazy(() => import("./sections/projects"));
+const Contact = lazy(() => import("./sections/contact"));
+const Footer = lazy(() => import("./sections/footer"));
 
 function App() {
   return (
@@ -19,11 +18,13 @@ function App() {
             <Header />
             <Cursor />
             <Hero />
-            <About />
-            <Skills />
-            <Projects />
-            <Contact />
-            <Footer />
+            <Suspense fallback={<div className="text-white text-center py-10">Loading section...</div>}>
+              <About />
+              <Skills />
+              <Projects />
+              <Contact />
+              <Footer />
+            </Suspense>
           </div>
         </div>
       </BrowserRouter>
