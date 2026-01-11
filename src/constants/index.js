@@ -9,7 +9,11 @@ export const navLinks = [
   },
   {
     id: "projects",
-    title: "Projects",
+    title: "Featured",
+  },
+  {
+    id: "all-projects",
+    title: "All Projects",
   },
   {
     id: "contact",
@@ -69,7 +73,7 @@ export const myProjects = [
     subdesc:
       "Developed using the MERN stack (MongoDB, Express.js, React.js, Node.js), along with Leaflet.js, Socket.io, and Threat Intelligence APIs, the system enables users to visualize, track, and analyze cyber incidents as they happen.",
     git: "https://github.com/sijo07/the-checkmate",
-    href: "",
+    href: "https://thecheckmate.onrender.com/",
     texture: "/textures/project/project1.mp4",
     tags: [
       {
@@ -116,7 +120,7 @@ export const myProjects = [
     subdesc:
       "Developed using the MERN stack (MongoDB, Express.js, React.js, Node.js) and Vite.js, this platform features secure authentication, a dynamic shopping cart, personalized profiles — all styled with Tailwind CSS for a sleek, responsive design.",
     git: "https://github.com/sijo07/theFashionisto",
-    href: "",
+    href: "https://thefashionisto.onrender.com/",
     texture: "/textures/project/project2.mp4",
     tags: [
       { id: 1, name: "React.js", path: "/assets/react.png" },
@@ -149,8 +153,194 @@ export const myProjects = [
     subdesc:
       "The app features light and dark modes, category sorting, and a responsive design with Tailwind CSS. Axios handles API requests, while React Icons enhance navigation and visual appeal.",
     git: "https://github.com/sijo07/the-gameapp",
+    href: "https://thegameapp.vercel.app/",
+    texture: "/textures/project/project4.mp4",
+    tags: [
+      {
+        id: 1,
+        name: "React.js",
+        path: "/assets/react.png",
+      },
+      {
+        id: 2,
+        name: "Vite.js",
+        path: "/assets/vitejs.png",
+      },
+      {
+        id: 3,
+        name: "Tailwind CSS",
+        path: "/assets/tailwind.png",
+      },
+      {
+        id: 4,
+        name: "Axios",
+        path: "/assets/axios.png",
+      },
+    ],
+  },
+  {
+    title: "musicApp",
+    desc: "musicApp is a dynamic web application built with React.js and Vite.js for exploring games. It fetches data from an external API to provide real-time updates and smooth browsing.",
+    subdesc:
+      "The app features light and dark modes, category sorting, and a responsive design with Tailwind CSS. Axios handles API requests, while React Icons enhance navigation and visual appeal.",
+    git: "https://github.com/sijo07/musicApp",
+    href: "https://harmony-hub-musicapp.vercel.app/",
+    texture: "/textures/project/project4.mp4",
+    tags: [
+      {
+        id: 1,
+        name: "React.js",
+        path: "/assets/react.png",
+      },
+      {
+        id: 2,
+        name: "Vite.js",
+        path: "/assets/vitejs.png",
+      },
+      {
+        id: 3,
+        name: "Tailwind CSS",
+        path: "/assets/tailwind.png",
+      },
+      {
+        id: 4,
+        name: "Axios",
+        path: "/assets/axios.png",
+      },
+    ],
+  },
+  {
+    title: "civicapp",
+    desc: "civicapp is a dynamic web application built with React.js and Vite.js for exploring games. It fetches data from an external API to provide real-time updates and smooth browsing.",
+    subdesc:
+      "The app features light and dark modes, category sorting, and a responsive design with Tailwind CSS. Axios handles API requests, while React Icons enhance navigation and visual appeal.",
+    git: "https://github.com/sijo07/civicapp",
     href: "",
     texture: "/textures/project/project4.mp4",
+    tags: [
+      {
+        id: 1,
+        name: "React.js",
+        path: "/assets/react.png",
+      },
+      {
+        id: 2,
+        name: "Vite.js",
+        path: "/assets/vitejs.png",
+      },
+      {
+        id: 3,
+        name: "Tailwind CSS",
+        path: "/assets/tailwind.png",
+      },
+      {
+        id: 4,
+        name: "Axios",
+        path: "/assets/axios.png",
+      },
+    ],
+  },
+  {
+    title: "Eye2Eye",
+    desc: "Eye2Eye is a dynamic web application built with React.js and Vite.js for exploring games. It fetches data from an external API to provide real-time updates and smooth browsing.",
+    subdesc:
+      "The app features light and dark modes, category sorting, and a responsive design with Tailwind CSS. Axios handles API requests, while React Icons enhance navigation and visual appeal.",
+    git: "https://github.com/sijo07/eye2eye",
+    href: "",
+    texture: "/textures/project/project5.mp4",
+    tags: [
+      {
+        id: 1,
+        name: "React.js",
+        path: "/assets/react.png",
+      },
+      {
+        id: 2,
+        name: "Vite.js",
+        path: "/assets/vitejs.png",
+      },
+      {
+        id: 3,
+        name: "Tailwind CSS",
+        path: "/assets/tailwind.png",
+      },
+      {
+        id: 4,
+        name: "Axios",
+        path: "/assets/axios.png",
+      },
+    ],
+  },
+  {
+    title: "HRMS",
+    desc: "HRMS is a dynamic web application built with React.js and Vite.js for exploring games. It fetches data from an external API to provide real-time updates and smooth browsing.",
+    subdesc:
+      "The app features light and dark modes, category sorting, and a responsive design with Tailwind CSS. Axios handles API requests, while React Icons enhance navigation and visual appeal.",
+    git: "https://github.com/sijo07/hrms",
+    href: "",
+    texture: "/textures/project/project6.mp4",
+    tags: [
+      {
+        id: 1,
+        name: "React.js",
+        path: "/assets/react.png",
+      },
+      {
+        id: 2,
+        name: "Vite.js",
+        path: "/assets/vitejs.png",
+      },
+      {
+        id: 3,
+        name: "Tailwind CSS",
+        path: "/assets/tailwind.png",
+      },
+      {
+        id: 4,
+        name: "Axios",
+        path: "/assets/axios.png",
+      },
+    ],
+  },
+  {
+    title: "tallySync",
+    desc: "Eye2Eye is a dynamic web application built with React.js and Vite.js for exploring games. It fetches data from an external API to provide real-time updates and smooth browsing.",
+    subdesc:
+      "The app features light and dark modes, category sorting, and a responsive design with Tailwind CSS. Axios handles API requests, while React Icons enhance navigation and visual appeal.",
+    git: "https://github.com/sijo07/tallySync",
+    href: "",
+    texture: "/textures/project/project7.mp4",
+    tags: [
+      {
+        id: 1,
+        name: "React.js",
+        path: "/assets/react.png",
+      },
+      {
+        id: 2,
+        name: "Vite.js",
+        path: "/assets/vitejs.png",
+      },
+      {
+        id: 3,
+        name: "Tailwind CSS",
+        path: "/assets/tailwind.png",
+      },
+      {
+        id: 4,
+        name: "Axios",
+        path: "/assets/axios.png",
+      },
+    ],
+  },
+  {
+    title: "techzonQuotations",
+    desc: "techzonQuotations is a dynamic web application built with React.js and Vite.js for exploring games. It fetches data from an external API to provide real-time updates and smooth browsing.",
+    subdesc:
+      "The app features light and dark modes, category sorting, and a responsive design with Tailwind CSS. Axios handles API requests, while React Icons enhance navigation and visual appeal.",
+    git: "https://github.com/sijo07/techzonQuotations",
+    href: "",
+    texture: "/textures/project/project8.mp4",
     tags: [
       {
         id: 1,

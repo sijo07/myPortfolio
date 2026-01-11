@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { FiGithub, FiLinkedin, FiX } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -23,11 +23,32 @@ const Header = () => {
   const [toggle, setToggle] = useState(false);
   const [contactFormOpen, setContactFormOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
 
   const openContactForm = () => setContactFormOpen(true);
   const closeContactForm = () => setContactFormOpen(false);
 
-  const handleScrollTo = (id) => {
+  // Handle updates when location changes
+  useEffect(() => {
+    if (location.pathname === "/projects") {
+      setActive("All Projects");
+      window.scrollTo(0, 0);
+    } else if (location.hash) {
+      const id = location.hash.replace("#", "");
+      const section = document.getElementById(id);
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth" });
+        setActive(navLinks.find((n) => n.id === id)?.title || "Home");
+      }
+    }
+  }, [location]);
+
+  const handleNavClick = (id) => {
+    setToggle(false);
+    // If we're not on home page, we need to let the Link component handle navigation
+    // The scrolling will be handled by the useEffect above when the hash changes
+    if (location.pathname !== "/") return;
+
     const section = document.getElementById(id);
     if (section) {
       section.scrollIntoView({ behavior: "smooth" });
@@ -37,15 +58,12 @@ const Header = () => {
     }
   };
 
-  const handleNavClick = (id) => {
-    setToggle(false);
-    handleScrollTo(id);
-  };
-
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
       setScrolled(scrollY > 50);
+
+      if (location.pathname !== "/") return;
 
       const scrollPosition = scrollY + window.innerHeight / 2;
       let currentSection = "Home";
@@ -61,7 +79,7 @@ const Header = () => {
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [location.pathname]);
 
   useEffect(() => {
     document.body.style.overflow = contactFormOpen ? "hidden" : "auto";
@@ -131,12 +149,22 @@ const Header = () => {
                 className={`text-[18px] font-medium cursor-pointer relative group hover:text-purple-100 ${active === nav.title ? "text-white" : "text-gray-300"
                   }`}
               >
-                <a
-                  href={`#${nav.id}`}
+                <Link
+                  to={nav.id === "all-projects" ? "/projects" : `/#${nav.id}`}
                   className="relative"
                   onClick={(e) => {
-                    e.preventDefault();
-                    handleNavClick(nav.id);
+                    // If it's the projects page link, we let it navigate normally
+                    if (nav.id === "all-projects") {
+                      setActive("All Projects");
+                      return; // Let standard navigation happen
+                    }
+
+                    // If we are already on home, prevent default and scroll
+                    if (location.pathname === "/") {
+                      e.preventDefault();
+                      handleNavClick(nav.id);
+                    }
+                    // Otherwise let it navigate to /#id which the useEffect will handle
                   }}
                 >
                   {nav.title}
@@ -144,7 +172,7 @@ const Header = () => {
                     className={`absolute left-0 -bottom-1 h-[2px] bg-purple-500 transition-all duration-300 ${active === nav.title ? "w-full" : "w-0 group-hover:w-full"
                       }`}
                   ></span>
-                </a>
+                </Link>
               </motion.li>
             ))}
           </motion.ul>
@@ -240,7 +268,23 @@ const Header = () => {
                           handleNavClick(nav.id);
                         }}
                       >
-                        <a href={`#${nav.id}`}>{nav.title}</a>
+                        <Link
+                          to={nav.id === "all-projects" ? "/projects" : `/#${nav.id}`}
+                          onClick={(e) => {
+                            if (nav.id === "all-projects") {
+                              setToggle(false);
+                              return;
+                            }
+                            if (location.pathname === "/") {
+                              e.preventDefault();
+                              handleNavClick(nav.id);
+                            } else {
+                              setToggle(false);
+                            }
+                          }}
+                        >
+                          {nav.title}
+                        </Link>
                       </motion.li>
                     ))}
                   </motion.ul>

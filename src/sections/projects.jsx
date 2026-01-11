@@ -1,5 +1,6 @@
 import gsap from "gsap";
 import { Suspense, useState, useRef, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Canvas } from "@react-three/fiber";
 import { Center, OrbitControls } from "@react-three/drei";
@@ -41,8 +42,8 @@ const Projects = () => {
             ? projectCount - 1
             : prev - 1
           : prev === projectCount - 1
-          ? 0
-          : prev + 1;
+            ? 0
+            : prev + 1;
 
       detailsRef.current?.scrollIntoView({
         behavior: "smooth",
@@ -167,6 +168,13 @@ const Projects = () => {
             >
               <GrFormNextLink size={25} />
             </button>
+
+            <Link
+              to="/projects"
+              className="ml-auto px-6 py-2 rounded-xl border border-purple-500/50 text-white font-semibold hover:bg-purple-900/30 hover:border-purple-500 transition-all duration-300"
+            >
+              View All
+            </Link>
           </motion.div>
         </motion.div>
       </AnimatePresence>
