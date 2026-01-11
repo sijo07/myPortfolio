@@ -1,5 +1,5 @@
 import { Header } from "../sections";
-import { Cursor, AnimatedUnderline } from "../components";
+import { Cursor, AnimatedUnderline, AnimatedBackground } from "../components";
 import { myProjects } from "../constants";
 import { GrGithub, GrPlay } from "react-icons/gr";
 import { FaLink } from "react-icons/fa";
@@ -137,8 +137,9 @@ const ProjectsPage = () => {
     const [activeVideoIndex, setActiveVideoIndex] = useState(null);
 
     return (
-        <div className="relative z-0 bg-primary min-h-screen flex flex-col justify-between">
-            <div className="bg-hero-pattern bg-cover bg-no-repeat bg-center fixed inset-0 -z-10 opacity-30"></div>
+        <div className="relative z-0 bg-primary min-h-screen flex flex-col justify-between overflow-hidden">
+            <AnimatedBackground className="absolute inset-0 -z-10" />
+            <div className="bg-hero-pattern bg-cover bg-no-repeat bg-center fixed inset-0 -z-20 opacity-30"></div>
 
             <div>
                 <Header />

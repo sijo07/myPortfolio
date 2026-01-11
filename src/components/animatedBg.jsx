@@ -1,7 +1,7 @@
 import React from "react";
 
-const AnimatedBackground = () => (
-  <div className="absolute inset-0 flex justify-center items-center overflow-hidden">
+const AnimatedBackground = ({ className }) => (
+  <div className={`absolute inset-0 flex justify-center items-center overflow-hidden pointer-events-none ${className || ""}`}>
     <svg
       className="BgAnimation__svg"
       viewBox="0 0 602 602"

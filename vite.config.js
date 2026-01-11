@@ -14,6 +14,7 @@ export default defineConfig({
         },
       },
     },
+    chunkSizeWarningLimit: 1600,
   },
   server: {
     port: 8004,

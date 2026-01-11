@@ -1,10 +1,11 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import { Header, Hero } from "./sections";
-import { Cursor } from "./components";
+import { Cursor, Loader, ErrorBoundary } from "./components";
 
 const ProjectsPage = lazy(() => import("./pages/ProjectsPage"));
 const ProjectDetailsPage = lazy(() => import("./pages/ProjectDetailsPage"));
+const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
 
 const About = lazy(() => import("./sections/about"));
 const Skills = lazy(() => import("./sections/skills"));
@@ -18,7 +19,7 @@ const Home = () => (
       <Header />
       <Cursor />
       <Hero />
-      <Suspense fallback={<div className="text-white text-center py-10">Loading section...</div>}>
+      <Suspense fallback={<div className="h-screen w-full"></div>}>
         <About />
         <Skills />
         <Projects />
@@ -31,17 +32,18 @@ const Home = () => (
 
 function App() {
   return (
-    <>
+    <ErrorBoundary>
       <BrowserRouter>
-        <Suspense fallback={<div className="bg-primary h-screen w-full flex items-center justify-center text-white font-bold text-xl">Loading...</div>}>
+        <Suspense fallback={<Loader />}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/projects" element={<ProjectsPage />} />
             <Route path="/projects/:id" element={<ProjectDetailsPage />} />
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>
       </BrowserRouter>
-    </>
+    </ErrorBoundary>
   );
 }
 
