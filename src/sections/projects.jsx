@@ -173,7 +173,7 @@ const Projects = () => {
               to="/projects"
               className="ml-auto px-6 py-2 rounded-xl border border-purple-500/50 text-white font-semibold hover:bg-purple-900/30 hover:border-purple-500 transition-all duration-300"
             >
-              View All
+              View All Projects
             </Link>
           </motion.div>
         </motion.div>

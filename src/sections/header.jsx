@@ -19,7 +19,7 @@ const socialLinks = [
 ];
 
 const Header = () => {
-  const [active, setActive] = useState("Home");
+  const [active, setActive] = useState("Hero");
   const [toggle, setToggle] = useState(false);
   const [contactFormOpen, setContactFormOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -38,22 +38,20 @@ const Header = () => {
       const section = document.getElementById(id);
       if (section) {
         section.scrollIntoView({ behavior: "smooth" });
-        setActive(navLinks.find((n) => n.id === id)?.title || "Home");
+        setActive(navLinks.find((n) => n.id === id)?.title || "Hero");
       }
     }
   }, [location]);
 
   const handleNavClick = (id) => {
     setToggle(false);
-    // If we're not on home page, we need to let the Link component handle navigation
-    // The scrolling will be handled by the useEffect above when the hash changes
-    if (location.pathname !== "/") return;
+    if (location.pathname !== "/hero") return;
 
     const section = document.getElementById(id);
     if (section) {
       section.scrollIntoView({ behavior: "smooth" });
       setActive(
-        id === "home" ? "Home" : navLinks.find((n) => n.id === id)?.title
+        id === "hero" ? "Hero" : navLinks.find((n) => n.id === id)?.title
       );
     }
   };
@@ -63,10 +61,10 @@ const Header = () => {
       const scrollY = window.scrollY;
       setScrolled(scrollY > 50);
 
-      if (location.pathname !== "/") return;
+      if (location.pathname !== "/hero") return;
 
       const scrollPosition = scrollY + window.innerHeight / 2;
-      let currentSection = "Home";
+      let currentSection = "Hero";
       navLinks.forEach((nav) => {
         const section = document.getElementById(nav.id);
         if (section && scrollPosition >= section.offsetTop) {
@@ -121,7 +119,7 @@ const Header = () => {
       >
         <div className="w-full flex justify-between items-center max-w-7xl mx-auto">
           <Link
-            to="/"
+            to="/hero"
             className="flex items-center gap-2"
             onClick={() => {
               setActive("");
@@ -160,7 +158,7 @@ const Header = () => {
                     }
 
                     // If we are already on home, prevent default and scroll
-                    if (location.pathname === "/") {
+                    if (location.pathname === "/hero") {
                       e.preventDefault();
                       handleNavClick(nav.id);
                     }
@@ -241,17 +239,6 @@ const Header = () => {
                     initial="hidden"
                     animate="show"
                   >
-                    <motion.li
-                      variants={fadeIn("down", "spring", 0, 0.5)}
-                      className={`text-[20px] font-medium cursor-pointer ${active === "Home" ? "text-white" : "text-gray-400"
-                        } hover:text-teal-400 transition-colors duration-300`}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleNavClick("home");
-                      }}
-                    >
-                      <a href="#">Home</a>
-                    </motion.li>
                     {navLinks.map((nav, index) => (
                       <motion.li
                         key={nav.id}
@@ -275,7 +262,7 @@ const Header = () => {
                               setToggle(false);
                               return;
                             }
-                            if (location.pathname === "/") {
+                            if (location.pathname === "/hero") {
                               e.preventDefault();
                               handleNavClick(nav.id);
                             } else {
