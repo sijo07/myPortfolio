@@ -94,6 +94,7 @@ section {
 }
 
 @media (max-width: 768px) {
+
   html,
   body,
   a,
@@ -186,6 +187,7 @@ select {
   from {
     transform: translateX(0);
   }
+
   to {
     transform: translateX(-50%);
   }
@@ -195,6 +197,7 @@ select {
   from {
     transform: translateX(-50%);
   }
+
   to {
     transform: translateX(0);
   }
@@ -208,7 +211,7 @@ select {
   animation: marquee-reverse var(--duration) linear infinite;
 }
 
-.group-hover\[animation-play-state\:paused\] > * {
+.group-hover\[animation-play-state\:paused\]>* {
   animation-play-state: paused;
 }
 
@@ -217,15 +220,18 @@ select {
     top: 70%;
     opacity: 0;
   }
+
   30% {
     top: 50%;
     opacity: 1;
   }
+
   100% {
     top: 20%;
     opacity: 0;
   }
 }
+
 .animate-scrollUp {
   animation: scrollUp 1.6s ease-in-out infinite;
 }

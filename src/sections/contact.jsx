@@ -46,7 +46,7 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="relative flex flex-col justify-center items-center px-10 lg:px-20 py-28 bg-black overflow-hidden"
+      className="relative flex flex-col justify-center items-center px-6 sm:px-10 lg:px-20 py-20 md:py-28 bg-black overflow-hidden"
     >
       <div className="absolute inset-0 z-0">
         <AnimatedBackground />
@@ -84,7 +84,7 @@ const Contact = () => {
           </h3>
 
           <motion.h2
-            className="text-white text-4xl sm:text-5xl font-extrabold leading-tight"
+            className="text-white text-3xl sm:text-4xl sm:text-5xl font-extrabold leading-tight"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.2 }}
@@ -94,7 +94,7 @@ const Contact = () => {
           </motion.h2>
 
           <motion.p
-            className="text-gray-300 text-lg max-w-lg leading-relaxed"
+            className="text-gray-300 text-base sm:text-lg max-w-lg leading-relaxed"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 1.2, delay: 0.4 }}

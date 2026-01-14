@@ -11,21 +11,27 @@ const Skills = () => {
       <AnimatedBackground className="absolute inset-0 -z-10" />
 
       {/* Header */}
-      <motion.div
-        className="w-full text-center mb-16"
-        initial={{ opacity: 0, y: -20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-      >
-        <h3 className="text-purple-400 text-lg sm:text-xl font-semibold uppercase tracking-[0.2em]">
+      <div className="w-full flex flex-col items-center text-center mb-16 space-y-4">
+        <motion.h3
+          className="text-purple-300 text-lg font-semibold uppercase tracking-widest"
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
           Skills & Technologies
-          <AnimatedUnderline className="mx-auto mt-2" />
-        </h3>
-        <h2 className="text-white text-4xl sm:text-5xl font-bold mt-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
+          <AnimatedUnderline className="mx-auto" />
+        </motion.h3>
+
+        <motion.h2
+          className="text-white text-3xl sm:text-4xl lg:text-6xl font-extrabold leading-tight"
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, delay: 0.2 }}
+        >
           My Tech Stack
-        </h2>
-      </motion.div>
+          <AnimatedUnderline width="w-32" height="h-2" duration={0.8} className="mx-auto mt-2" />
+        </motion.h2>
+      </div>
 
       {/* Holographic Grid */}
       <div className="w-full max-w-7xl mx-auto flex flex-wrap justify-center gap-10">

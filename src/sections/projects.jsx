@@ -1,221 +1,245 @@
-import gsap from "gsap";
-import { Suspense, useState, useRef, useEffect } from "react";
+import { useRef } from "react";
 import { Link } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
-import { Canvas } from "@react-three/fiber";
-import { Center, OrbitControls } from "@react-three/drei";
-import { GrFormNextLink, GrFormPreviousLink, GrGithub } from "react-icons/gr";
-import { FaLink } from "react-icons/fa";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+import { GrGithub } from "react-icons/gr";
+import { FaLink, FaLaptopCode } from "react-icons/fa";
 
 import { myProjects } from "../constants";
-import { CanvasLoader, Computer } from "../components/canvas";
-import { AnimatedBackground, AnimatedUnderline } from "../components";
+import { AnimatedBackground } from "../components";
 
-const projectCount = myProjects.length;
-
-const containerVariants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.15 } },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-};
+gsap.registerPlugin(ScrollTrigger);
 
 const Projects = () => {
-  const [selectedProjectIndex, setSelectedProjectIndex] = useState(0);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const detailsRef = useRef(null);
+  const sectionRef = useRef(null);
+  const trackRef = useRef(null);
 
-  useEffect(() => {
-    const handleResize = () => setWindowWidth(window.innerWidth);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  useGSAP(() => {
+    const track = trackRef.current;
+    const totalWidth = track.scrollWidth - window.innerWidth + 100; // Buffer
 
-  const handleNavigation = (direction) => {
-    setSelectedProjectIndex((prev) => {
-      const nextIndex =
-        direction === "previous"
-          ? prev === 0
-            ? projectCount - 1
-            : prev - 1
-          : prev === projectCount - 1
-            ? 0
-            : prev + 1;
-
-      detailsRef.current?.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
+    if (window.innerWidth >= 1024) { // Only enable pinned scroll on desktop/large screens for better UX
+      gsap.to(track, {
+        x: -totalWidth,
+        ease: "none",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top top",
+          end: `+=${totalWidth}`,
+          pin: true,
+          scrub: 1,
+          // markers: true, // Debugging
+        },
       });
-      return nextIndex;
-    });
-  };
-
-  const current = myProjects[selectedProjectIndex] || {
-    title: "Loading...",
-    desc: "",
-    subdesc: "",
-    tags: [],
-    href: "#",
-    texture: null,
-  };
+    }
+  }, { scope: sectionRef });
 
   return (
     <section
+      ref={sectionRef}
       id="projects"
-      ref={detailsRef}
-      className="relative min-h-screen flex flex-col lg:flex-row items-start lg:items-center justify-center gap-12 lg:gap-20 px-6 lg:px-24 py-20 bg-black overflow-hidden"
+      className="relative min-h-[100vh] lg:h-screen bg-black overflow-hidden flex flex-col justify-center"
     >
       <AnimatedBackground className="absolute inset-0 -z-10" />
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={selectedProjectIndex + "-text"}
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          exit="hidden"
-          className="z-10 w-full lg:w-1/2 text-left text-white flex flex-col space-y-6"
-        >
-          <motion.h3
-            variants={itemVariants}
-            className="text-purple-400 text-lg font-semibold uppercase tracking-widest"
-          >
-            Project Showcase
-            <AnimatedUnderline />
-          </motion.h3>
 
-          <motion.h2
-            variants={itemVariants}
-            className="bg-clip-text text-transparent bg-gradient-to-r from-[#6b3fa0] to-[#781844] text-4xl sm:text-5xl lg:text-5xl font-bold mt-3 leading-snug"
-          >
-            {current.title}
-          </motion.h2>
+      {/* Gradient Orbs */}
+      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-purple-900/20 blur-[120px] rounded-full mix-blend-screen pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-blue-900/20 blur-[120px] rounded-full mix-blend-screen pointer-events-none" />
 
-          <motion.p
-            variants={itemVariants}
-            className="text-gray-200 text-base sm:text-lg mt-4 max-w-[580px] leading-relaxed tracking-wide"
-          >
-            {current.desc}
-          </motion.p>
+      <div className="container mx-auto px-6 mb-8 lg:absolute lg:top-12 lg:left-24 lg:mb-0 z-20">
+        <h2 className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-white/50">
+          Selected Works
+        </h2>
+        <div className="h-1 w-24 bg-purple-500 mt-4 rounded-full" />
+      </div>
 
-          <motion.p
-            variants={itemVariants}
-            className="text-gray-400 text-sm sm:text-base mt-2 max-w-[580px] leading-relaxed tracking-wide"
+      {/* =========================================
+          MOBILE / TABLET LAYOUT (Vertical Stack)
+         ========================================= */}
+      <div className="flex flex-col gap-12 px-6 pt-24 pb-20 w-full lg:hidden">
+        {myProjects.map((project, index) => (
+          <div
+            key={index}
+            className="sticky top-24 z-10 w-full bg-zinc-900/80 backdrop-blur-xl border border-white/10 rounded-3xl overflow-hidden shadow-2xl"
           >
-            {current.subdesc}
-          </motion.p>
-
-          <motion.div
-            variants={itemVariants}
-            className="relative mt-6 w-full flex flex-wrap justify-start gap-4 perspective-1000"
-          >
-            {current.tags.map((tag, i) => (
-              <div
-                key={tag.name}
-                className="group relative flex items-center justify-center px-4 py-2 rounded-2xl bg-gradient-to-tr from-[#6b3fa0] to-[#781844] text-white font-semibold text-sm cursor-pointer transform transition-all duration-500 hover:scale-110 hover:rotate-1"
-              >
-                <img
-                  src={tag.path}
-                  alt={tag.name}
-                  className="w-5 h-5 mr-2 object-contain flex-shrink-0"
+            {/* Media Area */}
+            <div className="relative w-full aspect-video">
+              {project.texture ? (
+                <video
+                  src={project.texture}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-full object-cover"
                 />
-                <span className="whitespace-nowrap">{tag.name}</span>
-                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-30 bg-gradient-to-tr from-[#6b3fa0] to-[#781844] blur-xl transition-opacity duration-300"></div>
+              ) : (
+                <div className="relative w-full h-full bg-zinc-900">
+                  <img
+                    src="/assets/project-placeholder.png"
+                    alt={project.title}
+                    className="w-full h-full object-cover opacity-80"
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <span className="text-white/60 text-xs font-mono tracking-widest uppercase border border-white/10 px-3 py-1 rounded-full backdrop-blur-md">
+                      Preview Unavailable
+                    </span>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Content Area */}
+            <div className="p-6">
+              <div className="flex flex-wrap gap-2 mb-4">
+                {project.tags.slice(0, 3).map((tag, i) => (
+                  <span key={i} className="text-[10px] text-white/70 px-2 py-1 bg-white/5 rounded-full border border-white/5">
+                    {tag.name}
+                  </span>
+                ))}
               </div>
-            ))}
-          </motion.div>
 
-          <motion.div
-            variants={itemVariants}
-            className="flex items-center gap-5 mt-10"
-          >
-            <button
-              aria-label="Previous Project"
-              onClick={() => handleNavigation("previous")}
-              className="p-3 bg-gradient-to-tr from-[#6b3fa0] to-[#781844] rounded-full shadow-lg hover:shadow-[0_0_25px_rgba(168,85,247,0.6)] transition-all"
-            >
-              <GrFormPreviousLink size={25} />
-            </button>
+              <h3 className="text-xl font-bold text-white mb-2">{project.title}</h3>
+              <p className="text-gray-400 text-sm line-clamp-3 mb-6">{project.desc}</p>
 
-            <a
-              href={current.git}
-              target="_blank"
-              rel="noreferrer"
-              aria-label="GitHub Repo"
-              className="w-12 h-12 flex items-center justify-center bg-gradient-to-br from-[#6b3fa0] to-[#781844] rounded-full shadow-lg hover:shadow-[0_0_25px_rgba(236,72,153,0.6)] transition-all focus:outline-none focus:ring-2 focus:ring-pink-500"
-            >
-              <GrGithub size={22} className="text-white" />
-            </a>
-
-            {current.href && (
-              <a
-                href={current.href}
-                target="_blank"
-                rel="noreferrer"
-                aria-label="Live Project Link"
-                className="w-12 h-12 flex items-center justify-center bg-gradient-to-br from-[#6b3fa0] to-[#781844] rounded-full shadow-lg hover:shadow-[0_0_25px_rgba(236,72,153,0.6)] transition-all focus:outline-none focus:ring-2 focus:ring-pink-500"
-              >
-                <FaLink size={22} className="text-white" />
-              </a>
-            )}
-
-            <button
-              aria-label="Next Project"
-              onClick={() => handleNavigation("next")}
-              className="p-3 bg-gradient-to-tr from-[#6b3fa0] to-[#781844] rounded-full shadow-lg hover:shadow-[0_0_25px_rgba(236,72,153,0.6)] transition-all"
-            >
-              <GrFormNextLink size={25} />
-            </button>
-
-            <Link
-              to="/projects"
-              className="ml-auto px-6 py-2 rounded-xl border border-purple-500/50 text-white font-semibold hover:bg-purple-900/30 hover:border-purple-500 transition-all duration-300"
-            >
-              View All
-            </Link>
-          </motion.div>
-        </motion.div>
-      </AnimatePresence>
-
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={selectedProjectIndex}
-          initial={{ x: 300, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          exit={{ x: -300, opacity: 0 }}
-          transition={{ duration: 0.8, ease: "easeInOut" }}
-          className="relative z-10 w-full lg:w-1/2 h-[320px] sm:h-[420px] md:h-[480px] flex justify-center items-center"
-        >
-          <div className="w-full h-full rounded-2xl">
-            <Canvas>
-              <ambientLight intensity={Math.PI} />
-              <directionalLight position={[10, 10, 5]} />
-              <Center>
-                <Suspense fallback={<CanvasLoader />}>
-                  <group
-                    scale={windowWidth < 1024 ? 2.2 : 2.3}
-                    position={
-                      windowWidth < 1024 ? [-0.3, -3.0, 0] : [-0.5, -3, 0]
-                    }
-                    rotation={[0, -0.1, 0]}
+              <div className="flex items-center gap-3">
+                <a
+                  href={project.git}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex-1 flex items-center justify-center gap-2 py-3 bg-white/5 rounded-xl border border-white/10 text-white text-sm font-medium"
+                >
+                  <GrGithub /> Code
+                </a>
+                {project.href && (
+                  <a
+                    href={project.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex-1 flex items-center justify-center gap-2 py-3 bg-purple-600 rounded-xl text-white text-sm font-medium"
                   >
-                    <Computer texture={current.texture} />
-                  </group>
-                </Suspense>
-              </Center>
-              <OrbitControls
-                enableZoom={false}
-                minPolarAngle={Math.PI / 2}
-                maxPolarAngle={Math.PI / 2}
-                minAzimuthAngle={-Math.PI / 6}
-                maxAzimuthAngle={Math.PI / 6}
-              />
-            </Canvas>
+                    <FaLink /> Live Demo
+                  </a>
+                )}
+              </div>
+            </div>
           </div>
-        </motion.div>
-      </AnimatePresence>
+        ))}
+
+        {/* Mobile View All Link */}
+        <Link to="/projects" className="w-full py-4 text-center text-white/50 hover:text-white mt-8 flex items-center justify-center gap-2 group">
+          View All Projects <span className="group-hover:translate-x-1 transition-transform">→</span>
+        </Link>
+      </div>
+
+
+      {/* =========================================
+          DESKTOP LAYOUT (Horizontal Scroll)
+         ========================================= */}
+      <div
+        ref={trackRef}
+        className="hidden lg:flex gap-[4vw] px-[10vw] items-center w-max h-full"
+      >
+        {myProjects.map((project, index) => (
+          <div
+            key={index}
+            className="relative w-[45vw] xl:w-[35vw] h-[60vh] flex-shrink-0 group perspective-1000"
+          >
+            {/* Card Content */}
+            <div className="w-full h-full bg-zinc-900/40 backdrop-blur-xl border border-white/10 rounded-[2rem] overflow-hidden hover:border-purple-500/50 transition-all duration-500 flex flex-col">
+
+              {/* Media Area */}
+              <div className="relative h-[55%] overflow-hidden group-hover:shadow-[0_0_30px_rgba(168,85,247,0.4)] transition-all duration-500">
+                <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-transparent to-transparent z-10" />
+                {project.texture ? (
+                  <video
+                    src={project.texture}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out"
+                  />
+                ) : (
+                  <div className="relative w-full h-full bg-zinc-900">
+                    <img
+                      src="/assets/project-placeholder.png"
+                      alt={project.title}
+                      className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out opacity-80 group-hover:opacity-100"
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                      <span className="text-white/50 group-hover:text-white/80 font-mono text-sm tracking-widest uppercase border border-white/10 px-4 py-2 rounded-full backdrop-blur-md transition-colors">
+                        Preview Unavailable
+                      </span>
+                    </div>
+                  </div>
+                )}
+
+                {/* Overlay Tags */}
+                <div className="absolute top-4 right-4 z-20 flex gap-2">
+                  {project.tags.slice(0, 2).map((tag, i) => (
+                    <div key={i} className="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full border border-white/10 text-xs text-white">
+                      {tag.name}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Text Content */}
+              <div className="p-8 flex flex-col flex-1 relative z-20">
+                <h3 className="text-3xl font-bold text-white mb-3 group-hover:text-purple-400 transition-colors">
+                  {project.title}
+                </h3>
+                <p className="text-gray-400 text-base line-clamp-3 mb-6 flex-1">
+                  {project.desc}
+                </p>
+
+                <div className="flex items-center gap-4 mt-auto">
+                  <a
+                    href={project.git}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex items-center gap-2 px-5 py-2.5 bg-white/5 rounded-xl border border-white/10 hover:bg-white/10 hover:border-white/30 transition-all text-white text-sm font-medium"
+                  >
+                    <GrGithub size={18} />
+                    Code
+                  </a>
+                  {project.href && (
+                    <a
+                      href={project.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex items-center gap-2 px-5 py-2.5 bg-purple-600 rounded-xl hover:bg-purple-700 hover:shadow-[0_0_20px_rgba(168,85,247,0.4)] transition-all text-white text-sm font-medium"
+                    >
+                      <FaLink size={16} />
+                      Live Demo
+                    </a>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+
+        {/* View All Projects Card */}
+        <div className="w-[30vw] h-[60vh] flex-shrink-0 flex items-center justify-center">
+          <Link
+            to="/projects"
+            className="group relative flex flex-col items-center justify-center gap-6 p-12 rounded-[2rem] border border-white/10 bg-gradient-to-br from-white/5 to-transparent hover:border-purple-500/50 transition-all duration-500 w-full h-full"
+          >
+            <div className="w-20 h-20 rounded-full border border-white/20 flex items-center justify-center group-hover:scale-110 group-hover:border-purple-500 group-hover:shadow-[0_0_30px_rgba(168,85,247,0.6)] transition-all duration-500 bg-black/50 backdrop-blur-sm">
+              <span className="text-3xl text-white group-hover:text-purple-400 transition-colors">→</span>
+            </div>
+            <h3 className="text-3xl font-bold text-white group-hover:text-purple-400 transition-colors">
+              View All
+            </h3>
+            <p className="text-gray-500 text-center">
+              Explore the complete archive of my work.
+            </p>
+          </Link>
+        </div>
+      </div>
     </section>
   );
 };

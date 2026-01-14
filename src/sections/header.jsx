@@ -65,15 +65,21 @@ const Header = () => {
 
       if (location.pathname !== "/") return;
 
-      const scrollPosition = scrollY + window.innerHeight / 2;
-      let currentSection = "Home";
+      // Use a strict threshold line (e.g., 200px from top of screen)
+      const threshold = 200;
+
       navLinks.forEach((nav) => {
         const section = document.getElementById(nav.id);
-        if (section && scrollPosition >= section.offsetTop) {
-          currentSection = nav.title;
+        if (section) {
+          const rect = section.getBoundingClientRect();
+          // Check if the section contains the threshold line
+          // rect.top is distance of section top from viewport top
+          // rect.bottom is distance of section bottom from viewport top
+          if (rect.top <= threshold && rect.bottom >= threshold) {
+            setActive(nav.title);
+          }
         }
       });
-      setActive(currentSection);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });

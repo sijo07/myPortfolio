@@ -9,11 +9,7 @@ export const navLinks = [
   },
   {
     id: "projects",
-    title: "Featured",
-  },
-  {
-    id: "all-projects",
-    title: "All Projects",
+    title: "Projects",
   },
   {
     id: "contact",
@@ -25,7 +21,7 @@ export const aboutData = {
   title: "Web Developer",
   description:
     "I’m a developer who blends creativity with logic — crafting interactive digital experiences that feel alive. I love building responsive and efficient web applications, from stunning front-end designs to robust back-end systems. I strive to make technology simple, engaging, and impactful for every user.",
-  resumeLink: "/clementsijo - resume.pdf",
+  resumeLink: "/resume.pdf",
 };
 
 export const educationData = [
@@ -50,20 +46,23 @@ export const internshipData = [
 ];
 
 export const skillsData = [
+  { name: "HTML5", path: "/assets/html.png" },
+  { name: "CSS3", path: "/assets/css.png" },
+  { name: "JavaScript", path: "/assets/javascript.png" },
+  { name: "TypeScript", path: "/assets/typescript.png" },
   { name: "React.js", path: "/assets/react.png" },
   { name: "Next.js", path: "/assets/nextjs.png" },
   { name: "Vite.js", path: "/assets/vitejs.png" },
-  { name: "WordPress", path: "/assets/wordpress.png" },
   { name: "Tailwind CSS", path: "/assets/tailwind.png" },
   { name: "Bootstrap 5", path: "/assets/bootstrap.png" },
   { name: "Node.js", path: "/assets/node.png" },
+  { name: "Express.js", path: "/assets/expressjs.png" },
   { name: "MongoDB", path: "/assets/mongodb.png" },
-  { name: "Docker", path: "/assets/docker.png" },
-  { name: "JavaScript", path: "/assets/javascript.png" },
-  { name: "CSS3", path: "/assets/css.png" },
-  { name: "HTML", path: "/assets/html.png" },
+  { name: "MySQL", path: "/assets/mysql.png" },
   { name: "Git", path: "/assets/git.png" },
   { name: "Github", path: "/assets/github.png" },
+  { name: "Docker", path: "/assets/docker.png" },
+  { name: "WordPress", path: "/assets/wordpress.png" },
 ];
 
 export const myProjects = [
@@ -88,13 +87,13 @@ export const myProjects = [
       },
       {
         id: 4,
-        name: "Express js",
-        path: "/assets/express.png",
+        name: "Express.js",
+        path: "/assets/expressjs.png",
       },
       {
         id: 3,
-        name: "TailwindCSS",
-        path: "assets/tailwind.png",
+        name: "Tailwind CSS",
+        path: "/assets/tailwind.png",
       },
 
       {
@@ -126,13 +125,13 @@ export const myProjects = [
       { id: 1, name: "React.js", path: "/assets/react.png" },
       { id: 2, name: "Vite.js", path: "/assets/vitejs.png" },
       { id: 3, name: "Tailwind CSS", path: "/assets/tailwind.png" },
-      { id: 4, name: "Express.js", path: "/assets/express.png" },
+      { id: 4, name: "Express.js", path: "/assets/expressjs.png" },
       { id: 5, name: "MongoDB", path: "/assets/mongodb.png" },
       { id: 6, name: "Node.js", path: "/assets/node.png" },
     ],
   },
   {
-    title: "MyPortfolio - Developer Showcase",
+    title: "Developer Showcase",
     desc: "A modern personal portfolio website built to highlight projects, skills, and experience through clean design and smooth animations.",
     subdesc:
       "Developed using Next.js, Tailwind CSS, and Framer Motion, this portfolio emphasizes responsive design, optimized performance, and fluid transitions. It showcases professional projects, certifications, and publications through dynamic layouts and interactive visuals.",
@@ -185,7 +184,7 @@ export const myProjects = [
       "The app features light and dark modes, category sorting, and a responsive design with Tailwind CSS. Axios handles API requests, while React Icons enhance navigation and visual appeal.",
     git: "https://github.com/sijo07/musicApp",
     href: "https://harmony-hub-musicapp.vercel.app/",
-    texture: "/textures/project/project4.mp4",
+    texture: "",
     tags: [
       {
         id: 1,
@@ -216,7 +215,7 @@ export const myProjects = [
       "The app features light and dark modes, category sorting, and a responsive design with Tailwind CSS. Axios handles API requests, while React Icons enhance navigation and visual appeal.",
     git: "https://github.com/sijo07/civicapp",
     href: "",
-    texture: "/textures/project/project4.mp4",
+    texture: "",
     tags: [
       {
         id: 1,
@@ -245,9 +244,9 @@ export const myProjects = [
     desc: "Eye2Eye is a dynamic web application built with React.js and Vite.js for exploring games. It fetches data from an external API to provide real-time updates and smooth browsing.",
     subdesc:
       "The app features light and dark modes, category sorting, and a responsive design with Tailwind CSS. Axios handles API requests, while React Icons enhance navigation and visual appeal.",
-    git: "https://github.com/sijo07/eye2eye",
+    // git: "https://github.com/sijo07/eye2eye",
     href: "",
-    texture: "/textures/project/project5.mp4",
+    texture: "",
     tags: [
       {
         id: 1,
@@ -276,9 +275,9 @@ export const myProjects = [
     desc: "HRMS is a dynamic web application built with React.js and Vite.js for exploring games. It fetches data from an external API to provide real-time updates and smooth browsing.",
     subdesc:
       "The app features light and dark modes, category sorting, and a responsive design with Tailwind CSS. Axios handles API requests, while React Icons enhance navigation and visual appeal.",
-    git: "https://github.com/sijo07/hrms",
+    //git: "https://github.com/sijo07/hrms",
     href: "",
-    texture: "/textures/project/project6.mp4",
+    texture: "",
     tags: [
       {
         id: 1,
@@ -307,9 +306,9 @@ export const myProjects = [
     desc: "Eye2Eye is a dynamic web application built with React.js and Vite.js for exploring games. It fetches data from an external API to provide real-time updates and smooth browsing.",
     subdesc:
       "The app features light and dark modes, category sorting, and a responsive design with Tailwind CSS. Axios handles API requests, while React Icons enhance navigation and visual appeal.",
-    git: "https://github.com/sijo07/tallySync",
+    //git: "https://github.com/sijo07/tallySync",
     href: "",
-    texture: "/textures/project/project7.mp4",
+    texture: "",
     tags: [
       {
         id: 1,
@@ -334,13 +333,13 @@ export const myProjects = [
     ],
   },
   {
-    title: "techzonQuotations",
-    desc: "techzonQuotations is a dynamic web application built with React.js and Vite.js for exploring games. It fetches data from an external API to provide real-time updates and smooth browsing.",
+    title: "Quotations Generator",
+    desc: "Quotations Generator is a dynamic web application built with React.js and Vite.js for exploring games. It fetches data from an external API to provide real-time updates and smooth browsing.",
     subdesc:
       "The app features light and dark modes, category sorting, and a responsive design with Tailwind CSS. Axios handles API requests, while React Icons enhance navigation and visual appeal.",
-    git: "https://github.com/sijo07/techzonQuotations",
+    //git: "https://github.com/sijo07/techzonQuotations",
     href: "",
-    texture: "/textures/project/project8.mp4",
+    texture: "",
     tags: [
       {
         id: 1,

@@ -26,7 +26,7 @@ const Hero = () => {
       className="relative w-full h-screen mx-auto bg-black overflow-hidden"
     >
       <AnimatedBackground />
-      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-16 flex flex-col md:flex-row items-center md:items-start gap-5 mt-24 md:mt-32 lg:mt-36">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-16 flex flex-col md:flex-row items-center md:items-start gap-5 mt-28 md:mt-32 lg:mt-36">
         <motion.div
           initial="hidden"
           animate="show"
