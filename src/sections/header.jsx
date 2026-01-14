@@ -63,20 +63,40 @@ const Header = () => {
 
       if (location.pathname !== "/") return;
 
-      // Use a strict threshold line (e.g., 200px from top of screen)
-      const threshold = 200;
-      navLinks.forEach((nav) => {
-        const section = document.getElementById(nav.id);
-        if (section) {
-          const rect = section.getBoundingClientRect();
-          // Check if the section contains the threshold line
-          // rect.top is distance of section top from viewport top
-          // rect.bottom is distance of section bottom from viewport top
-          if (rect.top <= threshold && rect.bottom >= threshold) {
-            setActive(nav.title);
+      const sections = navLinks.map(nav => {
+        const el = document.getElementById(nav.id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          return { id: nav.title, top: rect.top, height: rect.height };
+        }
+        return null;
+      }).filter(Boolean);
+
+      // Find the section that covers the top-center of the viewport or is closest to the top
+      // We look for the first section whose top is somewhat near the top of the viewport
+      // or simply the one currently occupying the "reading" area (e.g. 100px from top)
+
+      let currentSection = "Home";
+
+      // Default to "Home" if near the top
+      if (scrollY < 100) {
+        currentSection = "Home";
+      } else {
+        // Find section closest to top (but not passed completely)
+        // A simple heuristic: The section with the smallest positive 'top' value 
+        // OR the section with the largest negative 'top' value (meaning we are inside it)
+
+        // Strategy: We are "in" a section if its top is <= viewport_offset AND its bottom is > viewport_offset
+        const viewportOffset = 150; // Use a comfortable offset
+
+        for (const section of sections) {
+          if (section.top <= viewportOffset && (section.top + section.height) > viewportOffset) {
+            currentSection = section.id;
+            break;
           }
         }
-      });
+      }
+      setActive(currentSection);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });

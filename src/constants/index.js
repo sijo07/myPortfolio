@@ -184,7 +184,7 @@ export const myProjects = [
       "Built with a robust Full-Stack architecture (React + Node.js), this system manages complex clinical data including eye prescriptions, lens specifications, and frame sales. It features detailed financial reporting, invoice generation, and multi-branch support with real-time analytics.",
     //git: "https://github.com/sijo07/eye2eye.git",
     href: "",
-    texture: "/textures/project/eye2eye.mp4",
+    texture: "",
     tags: [
       { id: 1, name: "React.js", path: "/assets/react.png" },
       { id: 2, name: "Node.js", path: "/assets/node.png" },
