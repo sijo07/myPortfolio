@@ -22,7 +22,7 @@ const Hero = () => {
 
   return (
     <section
-      id="hero"
+      id="home"
       className="relative w-full h-screen mx-auto bg-black overflow-hidden"
     >
       <AnimatedBackground />

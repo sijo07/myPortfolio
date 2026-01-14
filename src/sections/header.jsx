@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FiGithub, FiLinkedin, FiX } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { staggerContainer, fadeIn, zoomIn } from "../utils/motion";
 import { navLinks } from "../constants";
+import { menu, close } from "../assets";
 import { ContactForm } from "../components";
 
 const socialLinks = [
@@ -23,30 +24,11 @@ const Header = () => {
   const [toggle, setToggle] = useState(false);
   const [contactFormOpen, setContactFormOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const location = useLocation();
 
   const openContactForm = () => setContactFormOpen(true);
   const closeContactForm = () => setContactFormOpen(false);
 
-  // Handle updates when location changes
-  useEffect(() => {
-    if (location.pathname === "/projects") {
-      setActive("All Projects");
-      window.scrollTo(0, 0);
-    } else if (location.hash) {
-      const id = location.hash.replace("#", "");
-      const section = document.getElementById(id);
-      if (section) {
-        section.scrollIntoView({ behavior: "smooth" });
-        setActive(navLinks.find((n) => n.id === id)?.title || "Home");
-      }
-    }
-  }, [location]);
-
-  const handleNavClick = (id) => {
-    setToggle(false);
-    if (location.pathname !== "/") return;
-
+  const handleScrollTo = (id) => {
     const section = document.getElementById(id);
     if (section) {
       section.scrollIntoView({ behavior: "smooth" });
@@ -56,53 +38,35 @@ const Header = () => {
     }
   };
 
+  const handleNavClick = (id) => {
+    setToggle(false);
+    handleScrollTo(id);
+  };
+
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
       setScrolled(scrollY > 50);
 
-      if (location.pathname !== "/") return;
-
-      const sections = navLinks.map(nav => {
-        const el = document.getElementById(nav.id);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          return { id: nav.title, top: rect.top, height: rect.height };
-        }
-        return null;
-      }).filter(Boolean);
-
-      // Find the section that covers the top-center of the viewport or is closest to the top
-      // We look for the first section whose top is somewhat near the top of the viewport
-      // or simply the one currently occupying the "reading" area (e.g. 100px from top)
-
+      const scrollPosition = scrollY + 100;
       let currentSection = "Home";
-
-      // Default to "Home" if near the top
-      if (scrollY < 100) {
-        currentSection = "Home";
-      } else {
-        // Find section closest to top (but not passed completely)
-        // A simple heuristic: The section with the smallest positive 'top' value 
-        // OR the section with the largest negative 'top' value (meaning we are inside it)
-
-        // Strategy: We are "in" a section if its top is <= viewport_offset AND its bottom is > viewport_offset
-        const viewportOffset = 150; // Use a comfortable offset
-
-        for (const section of sections) {
-          if (section.top <= viewportOffset && (section.top + section.height) > viewportOffset) {
-            currentSection = section.id;
-            break;
+      navLinks.forEach((nav) => {
+        const section = document.getElementById(nav.id);
+        if (section) {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.offsetHeight;
+          if (scrollY >= sectionTop - 150 && scrollY < sectionTop + sectionHeight - 150) {
+            currentSection = nav.title;
           }
         }
-      }
+      });
       setActive(currentSection);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [location.pathname]);
+  }, []);
 
   useEffect(() => {
     document.body.style.overflow = contactFormOpen ? "hidden" : "auto";
@@ -172,22 +136,12 @@ const Header = () => {
                 className={`text-[18px] font-medium cursor-pointer relative group hover:text-purple-100 ${active === nav.title ? "text-white" : "text-gray-300"
                   }`}
               >
-                <Link
-                  to={nav.id === "all-projects" ? "/projects" : `/#${nav.id}`}
+                <a
+                  href={`#${nav.id}`}
                   className="relative"
                   onClick={(e) => {
-                    // If it's the projects page link, we let it navigate normally
-                    if (nav.id === "all-projects") {
-                      setActive("All Projects");
-                      return; // Let standard navigation happen
-                    }
-
-                    // If we are already on home, prevent default and scroll
-                    if (location.pathname === "/") {
-                      e.preventDefault();
-                      handleNavClick(nav.id);
-                    }
-                    // Otherwise let it navigate to /#id which the useEffect will handle
+                    e.preventDefault();
+                    handleNavClick(nav.id);
                   }}
                 >
                   {nav.title}
@@ -195,7 +149,7 @@ const Header = () => {
                     className={`absolute left-0 -bottom-1 h-[2px] bg-purple-500 transition-all duration-300 ${active === nav.title ? "w-full" : "w-0 group-hover:w-full"
                       }`}
                   ></span>
-                </Link>
+                </a>
               </motion.li>
             ))}
           </motion.ul>
@@ -228,26 +182,15 @@ const Header = () => {
           </motion.div>
 
           <div className="md:hidden flex justify-end items-center relative z-50">
-            <button
-              onClick={() => setToggle(!toggle)}
-              className="flex flex-col justify-center items-center w-[28px] h-[28px] gap-[6px] focus:outline-none bg-transparent relative z-50"
-            >
-              <motion.span
-                className="w-full h-[3px] bg-white rounded-lg origin-center"
-                animate={toggle ? { rotate: 45, y: 9 } : { rotate: 0, y: 0 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            {!toggle && (
+              <motion.img
+                whileTap={{ scale: 0.8 }}
+                src={menu}
+                alt="menu"
+                className="w-[28px] h-[28px] object-contain cursor-pointer"
+                onClick={() => setToggle(true)}
               />
-              <motion.span
-                className="w-full h-[3px] bg-white rounded-lg"
-                animate={toggle ? { opacity: 0 } : { opacity: 1 }}
-                transition={{ duration: 0.2 }}
-              />
-              <motion.span
-                className="w-full h-[3px] bg-white rounded-lg origin-center"
-                animate={toggle ? { rotate: -45, y: -9 } : { rotate: 0, y: 0 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              />
-            </button>
+            )}
             <AnimatePresence>
               {toggle && (
                 <motion.div
@@ -256,14 +199,33 @@ const Header = () => {
                   initial="hidden"
                   animate="visible"
                   exit="exit"
-                  className="fixed top-0 left-0 w-full h-screen bg-black/95 backdrop-blur-xl flex flex-col items-center justify-center gap-8 z-40"
+                  className="fixed top-0 left-0 w-full h-screen bg-black backdrop-blur-md flex flex-col items-center justify-center gap-8 z-40"
                 >
+                  <motion.img
+                    whileTap={{ scale: 0.8 }}
+                    src={close}
+                    alt="close"
+                    onClick={() => setToggle(false)}
+                    className="absolute top-6 right-6 w-[28px] h-[28px] object-contain cursor-pointer hover:rotate-90 transition-transform duration-300"
+                  />
+
                   <motion.ul
                     className="flex flex-col items-center gap-6 list-none"
                     variants={staggerContainer(0.15, 0.2)}
                     initial="hidden"
                     animate="show"
                   >
+                    <motion.li
+                      variants={fadeIn("down", "spring", 0, 0.5)}
+                      className={`text-[20px] font-medium cursor-pointer ${active === "Home" ? "text-white" : "text-gray-400"
+                        } hover:text-teal-400 transition-colors duration-300`}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleNavClick("home");
+                      }}
+                    >
+                      <a href="#">Home</a>
+                    </motion.li>
                     {navLinks.map((nav, index) => (
                       <motion.li
                         key={nav.id}
@@ -280,23 +242,7 @@ const Header = () => {
                           handleNavClick(nav.id);
                         }}
                       >
-                        <Link
-                          to={nav.id === "all-projects" ? "/projects" : `/#${nav.id}`}
-                          onClick={(e) => {
-                            if (nav.id === "all-projects") {
-                              setToggle(false);
-                              return;
-                            }
-                            if (location.pathname === "/") {
-                              e.preventDefault();
-                              handleNavClick(nav.id);
-                            } else {
-                              setToggle(false);
-                            }
-                          }}
-                        >
-                          {nav.title}
-                        </Link>
+                        <a href={`#${nav.id}`}>{nav.title}</a>
                       </motion.li>
                     ))}
                   </motion.ul>

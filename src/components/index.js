@@ -6,4 +6,4 @@ export { default as ContactForm } from "./contactForm";
 export { default as TechCard } from "./TechCard";
 export { default as Loader } from "./Loader";
 export { default as ErrorBoundary } from "./ErrorBoundary";
-export { default as ScrollToTop } from "./ScrollToTop";
+

@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import { Header, Hero } from "./sections";
-import { Cursor, Loader, ErrorBoundary, ScrollToTop } from "./components";
+import { Cursor, Loader, ErrorBoundary } from "./components";
 
 const ProjectsPage = lazy(() => import("./pages/ProjectsPage"));
 const ProjectDetailsPage = lazy(() => import("./pages/ProjectDetailsPage"));
@@ -34,7 +34,6 @@ function App() {
   return (
     <ErrorBoundary>
       <BrowserRouter>
-        <ScrollToTop />
         <Suspense fallback={<Loader />}>
           <Routes>
             <Route path="/" element={<Navigate to="/hero" replace />} />
