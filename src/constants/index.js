@@ -67,63 +67,34 @@ export const skillsData = [
 
 export const myProjects = [
   {
-    title: "checkMate - Real Time Cyber Incident Tracker",
-    desc: "CheckMate is an cybersecurity monitoring platform that provides real-time insights into global cyber threats.",
+    title: "CheckMate - Real-Time Cyber Incident Tracker",
+    desc: "A powerful cybersecurity monitoring platform providing real-time global threat intelligence and autonomous defense orchestration.",
     subdesc:
-      "Developed using the MERN stack (MongoDB, Express.js, React.js, Node.js), along with Leaflet.js, Socket.io, and Threat Intelligence APIs, the system enables users to visualize, track, and analyze cyber incidents as they happen.",
+      "Built with the MERN stack, CheckMate integrates Leaflet.js for live geographical attack visualization, Socket.io for real-time data streaming, and advanced Threat Intelligence APIs to track and analyze security incidents as they happen.",
     git: "https://github.com/sijo07/the-checkmate",
     href: "https://thecheckmate.onrender.com/",
     texture: "/textures/project/project1.mp4",
     tags: [
-      {
-        id: 1,
-        name: "React.js",
-        path: "/assets/react.png",
-      },
-      {
-        id: 2,
-        name: "Vite.js",
-        path: "/assets/vitejs.png",
-      },
-      {
-        id: 4,
-        name: "Express.js",
-        path: "/assets/expressjs.png",
-      },
-      {
-        id: 3,
-        name: "Tailwind CSS",
-        path: "/assets/tailwind.png",
-      },
-
-      {
-        id: 4,
-        name: "MongoDB",
-        path: "/assets/mongodb.png",
-      },
-      {
-        id: 5,
-        name: "Node js",
-        path: "/assets/node.png",
-      },
-      {
-        id: 6,
-        name: "Axios",
-        path: "/assets/axios.png",
-      },
+      { id: 1, name: "React.js", path: "/assets/react.png" },
+      { id: 2, name: "Vite.js", path: "/assets/vitejs.png" },
+      { id: 3, name: "TailwindCSS", path: "/assets/tailwind.png" },
+      { id: 4, name: "MongoDB", path: "/assets/mongodb.png" },
+      { id: 5, name: "Node.js", path: "/assets/node.png" },
+      { id: 6, name: "Express.js", path: "/assets/express.png" },
+      { id: 7, name: "Socket.io", path: "/assets/socket.png" },
+      { id: 8, name: "Leaflet.js", path: "/assets/leaflet.png" },
     ],
   },
   {
     title: "theFashionisto - Online Fashion Store",
     desc: "theFashionisto is a modern e-commerce platform designed to offer a seamless online shopping experience with efficient product management and user engagement.",
     subdesc:
-      "Developed using the MERN stack (MongoDB, Express.js, React.js, Node.js) and Vite.js, this platform features secure authentication, a dynamic shopping cart, personalized profiles — all styled with Tailwind CSS for a sleek, responsive design.",
+      "Developed using the MERN stack (MongoDB, Express.js, React.js, Node.js), this platform features a dynamic shopping cart and categorized product exploration (Western wear, Footwear, Accessories) — all styled with Tailwind CSS for a sleek, responsive design.",
     git: "https://github.com/sijo07/theFashionisto",
     href: "https://thefashionisto.onrender.com/",
     texture: "/textures/project/project2.mp4",
     tags: [
       { id: 1, name: "React.js", path: "/assets/react.png" },
-      { id: 2, name: "Vite.js", path: "/assets/vitejs.png" },
       { id: 3, name: "Tailwind CSS", path: "/assets/tailwind.png" },
       { id: 4, name: "Express.js", path: "/assets/expressjs.png" },
       { id: 5, name: "MongoDB", path: "/assets/mongodb.png" },
@@ -148,41 +119,26 @@ export const myProjects = [
   },
   {
     title: "theGames",
-    desc: "theGames is a dynamic web application built with React.js and Vite.js for exploring games. It fetches data from an external API to provide real-time updates and smooth browsing.",
+    desc: "theGames is a futuristic gaming multiverse hub built with React.js and Vite.js. It leverages the RAWG API to provide a comprehensive, real-time database of trending and category-sorted games with immersive exploration.",
     subdesc:
-      "The app features light and dark modes, category sorting, and a responsive design with Tailwind CSS. Axios handles API requests, while React Icons enhance navigation and visual appeal.",
+      "Built with a high-fidelity Cyberpunk aesthetic, the app features dynamic light/dark modes, smooth Framer Motion animations, and a fully responsive design. It uses Axios for robust API communication and React Icons for a premium visual interface.",
     git: "https://github.com/sijo07/the-gameapp",
     href: "https://thegameapp.vercel.app/",
     texture: "/textures/project/project4.mp4",
     tags: [
-      {
-        id: 1,
-        name: "React.js",
-        path: "/assets/react.png",
-      },
-      {
-        id: 2,
-        name: "Vite.js",
-        path: "/assets/vitejs.png",
-      },
-      {
-        id: 3,
-        name: "Tailwind CSS",
-        path: "/assets/tailwind.png",
-      },
-      {
-        id: 4,
-        name: "Axios",
-        path: "/assets/axios.png",
-      },
+      { id: 1, name: "React.js", path: "/assets/react.png" },
+      { id: 2, name: "Vite.js", path: "/assets/vitejs.png" },
+      { id: 3, name: "Tailwind CSS", path: "/assets/tailwind.png" },
+      { id: 4, name: "Axios", path: "/assets/axios.png" },
+      { id: 5, name: "Framer Motion", path: "/assets/framer.png" }
     ],
   },
   {
-    title: "musicApp",
-    desc: "musicApp is a dynamic web application built with React.js and Vite.js for exploring games. It fetches data from an external API to provide real-time updates and smooth browsing.",
+    title: "Harmony Hub",
+    desc: "A futuristic music streaming platform that offers a high-fidelity audio experience with dynamic visuals and curated global content.",
     subdesc:
-      "The app features light and dark modes, category sorting, and a responsive design with Tailwind CSS. Axios handles API requests, while React Icons enhance navigation and visual appeal.",
-    git: "https://github.com/sijo07/musicApp",
+      "Built using React.js, Vite, and Tailwind CSS, Harmony Hub integrates real-time music streaming, a live audio visualizer, and personalized playlists. It features a sleek, glassmorphic UI with smooth Framer Motion animations and leverages Axios for seamless backend integration.",
+    git: "https://github.com/sijo07/harmonyHub",
     href: "https://harmony-hub-musicapp.vercel.app/",
     texture: "",
     tags: [
@@ -209,73 +165,40 @@ export const myProjects = [
     ],
   },
   {
-    title: "civicapp",
-    desc: "civicapp is a dynamic web application built with React.js and Vite.js for exploring games. It fetches data from an external API to provide real-time updates and smooth browsing.",
-    subdesc:
-      "The app features light and dark modes, category sorting, and a responsive design with Tailwind CSS. Axios handles API requests, while React Icons enhance navigation and visual appeal.",
-    git: "https://github.com/sijo07/civicapp",
-    href: "",
+    title: "CivicHub",
+    desc: "Nexus (CivicApp) is a unified digital ecosystem designed to modernize local community economies by integrating Commerce, Logistics, and Governance into a single, premium tech platform.",
+    subdesc: "Built with Next.js and Tailwind CSS, Nexus solves the last-mile digital divide with immersive Bento Grid layouts, real-time logistics optimization, and interactive citizen engagement tools.",
+    // git: "https://github.com/sijo07/civicapp.git",
+    // href: "https://civicapp.vercel.app/",
     texture: "",
     tags: [
-      {
-        id: 1,
-        name: "React.js",
-        path: "/assets/react.png",
-      },
-      {
-        id: 2,
-        name: "Vite.js",
-        path: "/assets/vitejs.png",
-      },
-      {
-        id: 3,
-        name: "Tailwind CSS",
-        path: "/assets/tailwind.png",
-      },
-      {
-        id: 4,
-        name: "Axios",
-        path: "/assets/axios.png",
-      },
-    ],
+      { id: 1, name: "Next.js", path: "/assets/nextjs.png" },
+      { id: 2, name: "Tailwind CSS", path: "/assets/tailwind.png" },
+      { id: 3, name: "React", path: "/assets/react.png" }
+    ]
   },
   {
-    title: "Eye2Eye",
-    desc: "Eye2Eye is a dynamic web application built with React.js and Vite.js for exploring games. It fetches data from an external API to provide real-time updates and smooth browsing.",
+    title: "Eye2Eye - Optical Management System",
+    desc: "A professional cloud-based SaaS platform designed for optical shops to streamline eye prescriptions, inventory management, and billing.",
     subdesc:
-      "The app features light and dark modes, category sorting, and a responsive design with Tailwind CSS. Axios handles API requests, while React Icons enhance navigation and visual appeal.",
-    // git: "https://github.com/sijo07/eye2eye",
+      "Built with a robust Full-Stack architecture (React + Node.js), this system manages complex clinical data including eye prescriptions, lens specifications, and frame sales. It features detailed financial reporting, invoice generation, and multi-branch support with real-time analytics.",
+    //git: "https://github.com/sijo07/eye2eye.git",
     href: "",
-    texture: "",
+    texture: "/textures/project/eye2eye.mp4",
     tags: [
-      {
-        id: 1,
-        name: "React.js",
-        path: "/assets/react.png",
-      },
-      {
-        id: 2,
-        name: "Vite.js",
-        path: "/assets/vitejs.png",
-      },
-      {
-        id: 3,
-        name: "Tailwind CSS",
-        path: "/assets/tailwind.png",
-      },
-      {
-        id: 4,
-        name: "Axios",
-        path: "/assets/axios.png",
-      },
+      { id: 1, name: "React.js", path: "/assets/react.png" },
+      { id: 2, name: "Node.js", path: "/assets/node.png" },
+      { id: 3, name: "MySQL", path: "/assets/mysql.png" },
+      { id: 4, name: "Tailwind CSS", path: "/assets/tailwind.png" },
+      { id: 5, name: "TypeScript", path: "/assets/typescript.png" },
     ],
   },
   {
     title: "HRMS",
-    desc: "HRMS is a dynamic web application built with React.js and Vite.js for exploring games. It fetches data from an external API to provide real-time updates and smooth browsing.",
+    desc: "HRMS is a comprehensive Human Resource Management System built with React.js, Node.js, and MySQL. It offers a robust suite of tools for managing employees, attendance, payroll, benefits, and more, providing a centralized platform for HR operations.",
     subdesc:
-      "The app features light and dark modes, category sorting, and a responsive design with Tailwind CSS. Axios handles API requests, while React Icons enhance navigation and visual appeal.",
-    //git: "https://github.com/sijo07/hrms",
+      "The application features a secure authentication system, role-based access control, and detailed modules for leave management, expense tracking, asset management, and performance reviews. It utilizes Sequelize for database ORM and Tailwind CSS for a modern, responsive user interface.",
+    //git: "https://github.com/sijo07/HRMS.git",
     href: "",
     texture: "",
     tags: [
@@ -286,16 +209,26 @@ export const myProjects = [
       },
       {
         id: 2,
-        name: "Vite.js",
-        path: "/assets/vitejs.png",
+        name: "Node.js",
+        path: "/assets/node.png",
       },
       {
         id: 3,
+        name: "MySQL",
+        path: "/assets/mysql.png",
+      },
+      {
+        id: 4,
+        name: "Express",
+        path: "/assets/express.png",
+      },
+      {
+        id: 5,
         name: "Tailwind CSS",
         path: "/assets/tailwind.png",
       },
       {
-        id: 4,
+        id: 6,
         name: "Axios",
         path: "/assets/axios.png",
       },
@@ -303,10 +236,10 @@ export const myProjects = [
   },
   {
     title: "tallySync",
-    desc: "Eye2Eye is a dynamic web application built with React.js and Vite.js for exploring games. It fetches data from an external API to provide real-time updates and smooth browsing.",
+    desc: "tallySync is an AI-powered ERP and accounting synchronization tool that automates financial workflows. It leverages Google Gemini AI and OCR technology (Tesseract.js) to extract data from invoices and receipts with high precision.",
     subdesc:
-      "The app features light and dark modes, category sorting, and a responsive design with Tailwind CSS. Axios handles API requests, while React Icons enhance navigation and visual appeal.",
-    //git: "https://github.com/sijo07/tallySync",
+      "Built with React 19 and Node.js, the app features an AI chatbot for financial queries, interactive data dashboards using Recharts, and a robust MySQL-backed ERP system for managing sales and purchases.",
+    // git: "https://github.com/sijo07/tallySync.git",
     href: "",
     texture: "",
     tags: [
@@ -317,27 +250,27 @@ export const myProjects = [
       },
       {
         id: 2,
-        name: "Vite.js",
-        path: "/assets/vitejs.png",
+        name: "Node.js",
+        path: "/assets/node.png",
       },
       {
         id: 3,
-        name: "Tailwind CSS",
-        path: "/assets/tailwind.png",
+        name: "MySQL",
+        path: "/assets/mysql.png",
       },
       {
         id: 4,
-        name: "Axios",
-        path: "/assets/axios.png",
+        name: "Google Gemini",
+        path: "/assets/gemini.png",
       },
     ],
   },
   {
-    title: "Quotations Generator",
-    desc: "Quotations Generator is a dynamic web application built with React.js and Vite.js for exploring games. It fetches data from an external API to provide real-time updates and smooth browsing.",
+    title: "techzonQuotations",
+    desc: "techzonQuotations is a professional Quotation Management System designed to streamline the creation, tracking, and management of business proposals. It provides a seamless full-stack solution for business workflows.",
     subdesc:
-      "The app features light and dark modes, category sorting, and a responsive design with Tailwind CSS. Axios handles API requests, while React Icons enhance navigation and visual appeal.",
-    //git: "https://github.com/sijo07/techzonQuotations",
+      "Built with the MERN stack (MongoDB, Express, React, Node.js) and TypeScript, the app features a rich text editor (React Quill) for customized terms, product management, and dynamic template selection with a responsive Tailwind CSS interface.",
+    //git: "https://github.com/sijo07/techzonQuotations.git",
     href: "",
     texture: "",
     tags: [
@@ -348,18 +281,23 @@ export const myProjects = [
       },
       {
         id: 2,
-        name: "Vite.js",
-        path: "/assets/vitejs.png",
+        name: "Node.js",
+        path: "/assets/node.png",
       },
       {
         id: 3,
+        name: "MongoDB",
+        path: "/assets/mongodb.png",
+      },
+      {
+        id: 4,
         name: "Tailwind CSS",
         path: "/assets/tailwind.png",
       },
       {
-        id: 4,
-        name: "Axios",
-        path: "/assets/axios.png",
+        id: 5,
+        name: "TypeScript",
+        path: "/assets/typescript.png",
       },
     ],
   },

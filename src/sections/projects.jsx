@@ -127,100 +127,103 @@ const Projects = () => {
           </div>
         ))}
 
+
         {/* Mobile View All Link */}
         <Link to="/projects" className="w-full py-4 text-center text-white/50 hover:text-white mt-8 flex items-center justify-center gap-2 group">
           View All Projects <span className="group-hover:translate-x-1 transition-transform">→</span>
         </Link>
-      </div>
+      </div >
 
 
       {/* =========================================
           DESKTOP LAYOUT (Horizontal Scroll)
          ========================================= */}
-      <div
+      < div
         ref={trackRef}
         className="hidden lg:flex gap-[4vw] px-[10vw] items-center w-max h-full"
       >
-        {myProjects.map((project, index) => (
-          <div
-            key={index}
-            className="relative w-[45vw] xl:w-[35vw] h-[60vh] flex-shrink-0 group perspective-1000"
-          >
-            {/* Card Content */}
-            <div className="w-full h-full bg-zinc-900/40 backdrop-blur-xl border border-white/10 rounded-[2rem] overflow-hidden hover:border-purple-500/50 transition-all duration-500 flex flex-col">
+        {
+          myProjects.map((project, index) => (
+            <div
+              key={index}
+              className="relative w-[45vw] xl:w-[35vw] h-[60vh] flex-shrink-0 group perspective-1000"
+            >
+              {/* Card Content */}
+              <div className="w-full h-full bg-zinc-900/40 backdrop-blur-xl border border-white/10 rounded-[2rem] overflow-hidden hover:border-purple-500/50 transition-all duration-500 flex flex-col">
 
-              {/* Media Area */}
-              <div className="relative h-[55%] overflow-hidden group-hover:shadow-[0_0_30px_rgba(168,85,247,0.4)] transition-all duration-500">
-                <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-transparent to-transparent z-10" />
-                {project.texture ? (
-                  <video
-                    src={project.texture}
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out"
-                  />
-                ) : (
-                  <div className="relative w-full h-full bg-zinc-900">
-                    <img
-                      src="/assets/project-placeholder.png"
-                      alt={project.title}
-                      className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out opacity-80 group-hover:opacity-100"
+                {/* Media Area */}
+                <div className="relative h-[55%] overflow-hidden group-hover:shadow-[0_0_30px_rgba(168,85,247,0.4)] transition-all duration-500">
+                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-transparent to-transparent z-10" />
+                  {project.texture ? (
+                    <video
+                      src={project.texture}
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out"
                     />
-                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                      <span className="text-white/50 group-hover:text-white/80 font-mono text-sm tracking-widest uppercase border border-white/10 px-4 py-2 rounded-full backdrop-blur-md transition-colors">
-                        Preview Unavailable
-                      </span>
+                  ) : (
+                    <div className="relative w-full h-full bg-zinc-900">
+                      <img
+                        src="/assets/project-placeholder.png"
+                        alt={project.title}
+                        className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out opacity-80 group-hover:opacity-100"
+                      />
+                      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                        <span className="text-white/50 group-hover:text-white/80 font-mono text-sm tracking-widest uppercase border border-white/10 px-4 py-2 rounded-full backdrop-blur-md transition-colors">
+                          Preview Unavailable
+                        </span>
+                      </div>
                     </div>
+                  )}
+
+                  {/* Overlay Tags */}
+                  <div className="absolute top-4 right-4 z-20 flex gap-2">
+                    {project.tags.slice(0, 2).map((tag, i) => (
+                      <div key={i} className="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full border border-white/10 text-xs text-white">
+                        {tag.name}
+                      </div>
+                    ))}
                   </div>
-                )}
-
-                {/* Overlay Tags */}
-                <div className="absolute top-4 right-4 z-20 flex gap-2">
-                  {project.tags.slice(0, 2).map((tag, i) => (
-                    <div key={i} className="px-3 py-1 bg-black/50 backdrop-blur-md rounded-full border border-white/10 text-xs text-white">
-                      {tag.name}
-                    </div>
-                  ))}
                 </div>
-              </div>
 
-              {/* Text Content */}
-              <div className="p-8 flex flex-col flex-1 relative z-20">
-                <h3 className="text-3xl font-bold text-white mb-3 group-hover:text-purple-400 transition-colors">
-                  {project.title}
-                </h3>
-                <p className="text-gray-400 text-base line-clamp-3 mb-6 flex-1">
-                  {project.desc}
-                </p>
+                {/* Text Content */}
+                <div className="p-8 flex flex-col flex-1 relative z-20">
+                  <h3 className="text-3xl font-bold text-white mb-3 group-hover:text-purple-400 transition-colors">
+                    {project.title}
+                  </h3>
+                  <p className="text-gray-400 text-base line-clamp-3 mb-6 flex-1">
+                    {project.desc}
+                  </p>
 
-                <div className="flex items-center gap-4 mt-auto">
-                  <a
-                    href={project.git}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex items-center gap-2 px-5 py-2.5 bg-white/5 rounded-xl border border-white/10 hover:bg-white/10 hover:border-white/30 transition-all text-white text-sm font-medium"
-                  >
-                    <GrGithub size={18} />
-                    Code
-                  </a>
-                  {project.href && (
+                  <div className="flex items-center gap-4 mt-auto">
                     <a
-                      href={project.href}
+                      href={project.git}
                       target="_blank"
                       rel="noreferrer"
-                      className="flex items-center gap-2 px-5 py-2.5 bg-purple-600 rounded-xl hover:bg-purple-700 hover:shadow-[0_0_20px_rgba(168,85,247,0.4)] transition-all text-white text-sm font-medium"
+                      className="flex items-center gap-2 px-5 py-2.5 bg-white/5 rounded-xl border border-white/10 hover:bg-white/10 hover:border-white/30 transition-all text-white text-sm font-medium"
                     >
-                      <FaLink size={16} />
-                      Live Demo
+                      <GrGithub size={18} />
+                      Code
                     </a>
-                  )}
+                    {project.href && (
+                      <a
+                        href={project.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="flex items-center gap-2 px-5 py-2.5 bg-purple-600 rounded-xl hover:bg-purple-700 hover:shadow-[0_0_20px_rgba(168,85,247,0.4)] transition-all text-white text-sm font-medium"
+                      >
+                        <FaLink size={16} />
+                        Live Demo
+                      </a>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))
+        }
 
         {/* View All Projects Card */}
         <div className="w-[30vw] h-[60vh] flex-shrink-0 flex items-center justify-center">
@@ -239,8 +242,8 @@ const Projects = () => {
             </p>
           </Link>
         </div>
-      </div>
-    </section>
+      </div >
+    </section >
   );
 };
 

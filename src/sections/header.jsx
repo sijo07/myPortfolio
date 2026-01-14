@@ -45,8 +45,6 @@ const Header = () => {
 
   const handleNavClick = (id) => {
     setToggle(false);
-    // If we're not on home page, we need to let the Link component handle navigation
-    // The scrolling will be handled by the useEffect above when the hash changes
     if (location.pathname !== "/") return;
 
     const section = document.getElementById(id);
@@ -67,7 +65,6 @@ const Header = () => {
 
       // Use a strict threshold line (e.g., 200px from top of screen)
       const threshold = 200;
-
       navLinks.forEach((nav) => {
         const section = document.getElementById(nav.id);
         if (section) {
@@ -247,17 +244,6 @@ const Header = () => {
                     initial="hidden"
                     animate="show"
                   >
-                    <motion.li
-                      variants={fadeIn("down", "spring", 0, 0.5)}
-                      className={`text-[20px] font-medium cursor-pointer ${active === "Home" ? "text-white" : "text-gray-400"
-                        } hover:text-teal-400 transition-colors duration-300`}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleNavClick("home");
-                      }}
-                    >
-                      <a href="#">Home</a>
-                    </motion.li>
                     {navLinks.map((nav, index) => (
                       <motion.li
                         key={nav.id}
