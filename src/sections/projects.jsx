@@ -17,22 +17,54 @@ const Projects = () => {
 
   useGSAP(() => {
     const track = trackRef.current;
-    const totalWidth = track.scrollWidth - window.innerWidth + 100; // Buffer
+    if (!track) return;
+    const totalWidth = track.scrollWidth - window.innerWidth + 100;
 
-    if (window.innerWidth >= 1024) { // Only enable pinned scroll on desktop/large screens for better UX
-      gsap.to(track, {
-        x: -totalWidth,
-        ease: "none",
+    const tween = gsap.to(track, {
+      x: -totalWidth,
+      ease: "none",
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top top",
+        end: `+=${myProjects.length * 2000}`,
+        pin: true,
+        scrub: 1,
+      },
+    });
+
+    // Individual Box Animations
+    track.querySelectorAll(".project-box").forEach((box) => {
+      // Scale In Animation
+      gsap.fromTo(box,
+        { scale: 0.8, opacity: 0.5, rotateY: 10 },
+        {
+          scale: 1,
+          opacity: 1,
+          rotateY: 0,
+          scrollTrigger: {
+            trigger: box,
+            containerAnimation: tween,
+            start: "left 90%",
+            end: "center center",
+            scrub: true,
+          }
+        }
+      );
+
+      // Scale Out Animation
+      gsap.to(box, {
+        scale: 0.8,
+        opacity: 0.5,
+        rotateY: -10,
         scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top top",
-          end: `+=${totalWidth}`,
-          pin: true,
-          scrub: 1,
-          // markers: true, // Debugging
-        },
+          trigger: box,
+          containerAnimation: tween,
+          start: "center center",
+          end: "right 10%",
+          scrub: true,
+        }
       });
-    }
+    });
   }, { scope: sectionRef });
 
   return (
@@ -54,102 +86,18 @@ const Projects = () => {
         <div className="h-1 w-24 bg-purple-500 mt-4 rounded-full" />
       </div>
 
-      {/* =========================================
-          MOBILE / TABLET LAYOUT (Vertical Stack)
-         ========================================= */}
-      <div className="flex flex-col gap-12 px-6 pt-24 pb-20 w-full lg:hidden">
-        {myProjects.map((project, index) => (
-          <div
-            key={index}
-            className="sticky top-24 z-10 w-full bg-zinc-900/80 backdrop-blur-xl border border-white/10 rounded-3xl overflow-hidden shadow-2xl"
-          >
-            {/* Media Area */}
-            <div className="relative w-full aspect-video">
-              {project.texture ? (
-                <video
-                  src={project.texture}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className="w-full h-full object-cover"
-                />
-              ) : (
-                <div className="relative w-full h-full bg-zinc-900">
-                  <img
-                    src="/assets/project-placeholder.png"
-                    alt={project.title}
-                    className="w-full h-full object-cover opacity-80"
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-white/60 text-xs font-mono tracking-widest uppercase border border-white/10 px-3 py-1 rounded-full backdrop-blur-md">
-                      Preview Unavailable
-                    </span>
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* Content Area */}
-            <div className="p-6">
-              <div className="flex flex-wrap gap-2 mb-4">
-                {project.tags.slice(0, 3).map((tag, i) => (
-                  <span key={i} className="text-[10px] text-white/70 px-2 py-1 bg-white/5 rounded-full border border-white/5">
-                    {tag.name}
-                  </span>
-                ))}
-              </div>
-
-              <h3 className="text-xl font-bold text-white mb-2">{project.title}</h3>
-              <p className="text-gray-400 text-sm line-clamp-3 mb-6">{project.desc}</p>
-
-              <div className="flex items-center gap-3">
-                <a
-                  href={project.git}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex-1 flex items-center justify-center gap-2 py-3 bg-white/5 rounded-xl border border-white/10 text-white text-sm font-medium"
-                >
-                  <GrGithub /> Code
-                </a>
-                {project.href && (
-                  <a
-                    href={project.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex-1 flex items-center justify-center gap-2 py-3 bg-purple-600 rounded-xl text-white text-sm font-medium"
-                  >
-                    <FaLink /> Live Demo
-                  </a>
-                )}
-              </div>
-            </div>
-          </div>
-        ))}
-
-
-        {/* Mobile View All Link */}
-        <Link to="/projects" className="w-full py-4 text-center text-white/50 hover:text-white mt-8 flex items-center justify-center gap-2 group">
-          View All Projects <span className="group-hover:translate-x-1 transition-transform">→</span>
-        </Link>
-      </div >
-
-
-      {/* =========================================
-          DESKTOP LAYOUT (Horizontal Scroll)
-         ========================================= */}
-      < div
+      <div
         ref={trackRef}
-        className="hidden lg:flex gap-[4vw] px-[10vw] items-center w-max h-full"
+        className="flex gap-[6vw] px-[10vw] items-center w-max h-full relative z-20"
       >
         {
           myProjects.map((project, index) => (
             <div
               key={index}
-              className="relative w-[45vw] xl:w-[35vw] h-[60vh] flex-shrink-0 group perspective-1000"
+              className="relative project-box w-[85vw] md:w-[60vw] lg:w-[45vw] xl:w-[35vw] h-[60vh] flex-shrink-0 group perspective-1000"
             >
               {/* Card Content */}
-              <div className="w-full h-full bg-zinc-900/40 backdrop-blur-xl border border-white/10 rounded-[2rem] overflow-hidden hover:border-purple-500/50 transition-all duration-500 flex flex-col">
+              <div className="w-full h-full bg-[#0a0a0a]/90 backdrop-blur-3xl border-[3px] border-white/10 rounded-[2.5rem] overflow-hidden hover:border-purple-500/50 transition-all duration-700 flex flex-col shadow-[0_30px_60px_rgba(0,0,0,0.8)] relative z-20">
 
                 {/* Media Area */}
                 <div className="relative h-[55%] overflow-hidden group-hover:shadow-[0_0_30px_rgba(168,85,247,0.4)] transition-all duration-500">
@@ -190,7 +138,7 @@ const Projects = () => {
 
                 {/* Text Content */}
                 <div className="p-8 flex flex-col flex-1 relative z-20">
-                  <h3 className="text-3xl font-bold text-white mb-3 group-hover:text-purple-400 transition-colors">
+                  <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white mb-4 group-hover:text-purple-400 transition-colors leading-tight break-words">
                     {project.title}
                   </h3>
                   <p className="text-gray-400 text-base line-clamp-3 mb-6 flex-1">
@@ -226,10 +174,10 @@ const Projects = () => {
         }
 
         {/* View All Projects Card */}
-        <div className="w-[30vw] h-[60vh] flex-shrink-0 flex items-center justify-center">
+        <div className="project-box w-[85vw] md:w-[60vw] lg:w-[30vw] h-[60vh] flex-shrink-0 flex items-center justify-center">
           <Link
             to="/projects"
-            className="group relative flex flex-col items-center justify-center gap-6 p-12 rounded-[2rem] border border-white/10 bg-gradient-to-br from-white/5 to-transparent hover:border-purple-500/50 transition-all duration-500 w-full h-full"
+            className="group relative flex flex-col items-center justify-center gap-6 p-12 rounded-[2.5rem] border border-white/20 bg-zinc-900/40 backdrop-blur-xl hover:border-purple-500/50 transition-all duration-500 w-full h-full shadow-[0_20px_50px_rgba(0,0,0,0.3)]"
           >
             <div className="w-20 h-20 rounded-full border border-white/20 flex items-center justify-center group-hover:scale-110 group-hover:border-purple-500 group-hover:shadow-[0_0_30px_rgba(168,85,247,0.6)] transition-all duration-500 bg-black/50 backdrop-blur-sm">
               <span className="text-3xl text-white group-hover:text-purple-400 transition-colors">→</span>

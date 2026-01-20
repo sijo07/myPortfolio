@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { FiGithub, FiLinkedin, FiX } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -24,6 +24,8 @@ const Header = () => {
   const [toggle, setToggle] = useState(false);
   const [contactFormOpen, setContactFormOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const openContactForm = () => setContactFormOpen(true);
   const closeContactForm = () => setContactFormOpen(false);
@@ -40,7 +42,11 @@ const Header = () => {
 
   const handleNavClick = (id) => {
     setToggle(false);
-    handleScrollTo(id);
+    if (location.pathname !== "/") {
+      navigate(`/#${id}`);
+    } else {
+      handleScrollTo(id);
+    }
   };
 
   useEffect(() => {
@@ -215,8 +221,7 @@ const Header = () => {
                     initial="hidden"
                     animate="show"
                   >
-                    <motion.li
-                      variants={fadeIn("down", "spring", 0, 0.5)}
+                    <li
                       className={`text-[20px] font-medium cursor-pointer ${active === "Home" ? "text-white" : "text-gray-400"
                         } hover:text-teal-400 transition-colors duration-300`}
                       onClick={(e) => {
@@ -225,7 +230,7 @@ const Header = () => {
                       }}
                     >
                       <a href="#">Home</a>
-                    </motion.li>
+                    </li>
                     {navLinks.map((nav, index) => (
                       <motion.li
                         key={nav.id}

@@ -178,7 +178,7 @@ export const myProjects = [
     ]
   },
   {
-    title: "Eye2Eye - Optical Management System",
+    title: "Eye2Eye",
     desc: "A professional cloud-based SaaS platform designed for optical shops to streamline eye prescriptions, inventory management, and billing.",
     subdesc:
       "Built with a robust Full-Stack architecture (React + Node.js), this system manages complex clinical data including eye prescriptions, lens specifications, and frame sales. It features detailed financial reporting, invoice generation, and multi-branch support with real-time analytics.",
@@ -266,8 +266,8 @@ export const myProjects = [
     ],
   },
   {
-    title: "techzonQuotations",
-    desc: "techzonQuotations is a professional Quotation Management System designed to streamline the creation, tracking, and management of business proposals. It provides a seamless full-stack solution for business workflows.",
+    title: "Quotations-Generator",
+    desc: "Quotations is a professional Quotation Management System designed to streamline the creation, tracking, and management of business proposals. It provides a seamless full-stack solution for business workflows.",
     subdesc:
       "Built with the MERN stack (MongoDB, Express, React, Node.js) and TypeScript, the app features a rich text editor (React Quill) for customized terms, product management, and dynamic template selection with a responsive Tailwind CSS interface.",
     //git: "https://github.com/sijo07/techzonQuotations.git",
