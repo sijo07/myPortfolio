@@ -1,7 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Header } from "../sections";
-import { Cursor, AnimatedUnderline, AnimatedBackground } from "../components";
+import { Cursor, AnimatedUnderline, AnimatedBackground, SEO } from "../components";
 import { myProjects } from "../constants";
 import { GrGithub, GrFormPreviousLink, GrFormNextLink, GrPlay } from "react-icons/gr";
 import { FaLink } from "react-icons/fa";
@@ -87,6 +87,13 @@ const ProjectDetailsPage = () => {
 
     return (
         <div className="relative z-0 bg-primary min-h-screen flex flex-col justify-between overflow-hidden">
+            <SEO
+                title={project?.title || "Project Details"}
+                description={project?.desc || "Explore this project in detail"}
+                name="@clementsijo"
+                type="article"
+                image={project?.texture || "/assets/profile.png"}
+            />
             <AnimatedBackground className="absolute inset-0 -z-10" />
             <div className="bg-hero-pattern bg-cover bg-no-repeat bg-center fixed inset-0 -z-20 opacity-30"></div>
 

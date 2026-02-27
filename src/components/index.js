@@ -7,4 +7,6 @@ export { default as TechCard } from "./TechCard";
 export { default as Loader } from "./Loader";
 export { default as ErrorBoundary } from "./ErrorBoundary";
 export { default as ScrollHandler } from "./ScrollHandler";
+export { default as SEO } from "./SEO";
+export { default as SkeletonCard } from "./SkeletonCard";
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { aboutData, educationData, internshipData } from "../constants";
+import { aboutData, educationData, experienceData, internshipData } from "../constants";
 import { profile } from "../assets/index.js";
 import { AnimatedBackground, AnimatedUnderline } from "../components";
 import { FiDownload } from "react-icons/fi";
@@ -93,24 +93,45 @@ const About = () => {
                 </div>
               </motion.div>
 
-              <motion.div variants={fadeUp}>
-                <h3 className="text-white text-lg font-bold mb-6 flex items-center gap-2">
-                  <IoBriefcaseOutline className="text-pink-400" />
-                  Internship
-                </h3>
-                <div className="pl-2">
-                  {internshipData.map((intern, index) => (
-                    <TimelineItem
-                      key={index}
-                      title={intern.position}
-                      subtitle={intern.company}
-                      date={intern.period}
-                      icon={IoBriefcaseOutline}
-                      color="pink"
-                    />
-                  ))}
-                </div>
-              </motion.div>
+              <div className="flex flex-col gap-8">
+                <motion.div variants={fadeUp}>
+                  <h3 className="text-white text-lg font-bold mb-6 flex items-center gap-2">
+                    <IoBriefcaseOutline className="text-blue-400" />
+                    Experience
+                  </h3>
+                  <div className="pl-2">
+                    {experienceData.map((exp, index) => (
+                      <TimelineItem
+                        key={index}
+                        title={exp.role}
+                        subtitle={exp.company}
+                        date={exp.duration}
+                        icon={IoBriefcaseOutline}
+                        color="blue"
+                      />
+                    ))}
+                  </div>
+                </motion.div>
+
+                <motion.div variants={fadeUp}>
+                  <h3 className="text-white text-lg font-bold mb-6 flex items-center gap-2">
+                    <IoBriefcaseOutline className="text-pink-400" />
+                    Internship
+                  </h3>
+                  <div className="pl-2">
+                    {internshipData.map((intern, index) => (
+                      <TimelineItem
+                        key={index}
+                        title={intern.position}
+                        subtitle={intern.company}
+                        date={intern.period}
+                        icon={IoBriefcaseOutline}
+                        color="pink"
+                      />
+                    ))}
+                  </div>
+                </motion.div>
+              </div>
             </div>
 
             {/* Resume Button */}

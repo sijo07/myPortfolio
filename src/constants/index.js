@@ -37,6 +37,14 @@ export const educationData = [
   },
 ];
 
+export const experienceData = [
+  {
+    role: "Software Developer",
+    company: "Techzon Technologies FZC Palakkad",
+    duration: "Nov 2025 - present",
+  },
+];
+
 export const internshipData = [
   {
     position: "React js Developer Intern",
@@ -74,6 +82,7 @@ export const myProjects = [
     git: "https://github.com/sijo07/the-checkmate",
     href: "https://thecheckmate.onrender.com/",
     texture: "/textures/project/project1.mp4",
+    category: "Cybersecurity",
     tags: [
       { id: 1, name: "React.js", path: "/assets/react.png" },
       { id: 2, name: "Vite.js", path: "/assets/vitejs.png" },
@@ -93,6 +102,7 @@ export const myProjects = [
     git: "https://github.com/sijo07/theFashionisto",
     href: "https://thefashionisto.onrender.com/",
     texture: "/textures/project/project2.mp4",
+    category: "E-Commerce",
     tags: [
       { id: 1, name: "React.js", path: "/assets/react.png" },
       { id: 3, name: "Tailwind CSS", path: "/assets/tailwind.png" },
@@ -109,6 +119,7 @@ export const myProjects = [
     git: "https://github.com/sijo07/the-portfolio",
     href: "https://clementsijo-portfolio-dev.vercel.app/",
     texture: "/textures/project/project3.mp4",
+    category: "Web App",
     tags: [
       { id: 1, name: "Next.js", path: "/assets/nextjs.png" },
       { id: 2, name: "React.js", path: "/assets/react.png" },
@@ -125,6 +136,7 @@ export const myProjects = [
     git: "https://github.com/sijo07/the-gameapp",
     href: "https://thegameapp.vercel.app/",
     texture: "/textures/project/project4.mp4",
+    category: "Gaming",
     tags: [
       { id: 1, name: "React.js", path: "/assets/react.png" },
       { id: 2, name: "Vite.js", path: "/assets/vitejs.png" },
@@ -141,6 +153,7 @@ export const myProjects = [
     git: "https://github.com/sijo07/harmonyHub",
     href: "https://harmony-hub-musicapp.vercel.app/",
     texture: "",
+    category: "Music",
     tags: [
       {
         id: 1,
@@ -268,6 +281,42 @@ export const myProjects = [
   {
     title: "Quotations-Generator",
     desc: "Quotations is a professional Quotation Management System designed to streamline the creation, tracking, and management of business proposals. It provides a seamless full-stack solution for business workflows.",
+    subdesc:
+      "Built with the MERN stack (MongoDB, Express, React, Node.js) and TypeScript, the app features a rich text editor (React Quill) for customized terms, product management, and dynamic template selection with a responsive Tailwind CSS interface.",
+    //git: "https://github.com/sijo07/techzonQuotations.git",
+    href: "",
+    texture: "",
+    tags: [
+      {
+        id: 1,
+        name: "React.js",
+        path: "/assets/react.png",
+      },
+      {
+        id: 2,
+        name: "Node.js",
+        path: "/assets/node.png",
+      },
+      {
+        id: 3,
+        name: "MongoDB",
+        path: "/assets/mongodb.png",
+      },
+      {
+        id: 4,
+        name: "Tailwind CSS",
+        path: "/assets/tailwind.png",
+      },
+      {
+        id: 5,
+        name: "TypeScript",
+        path: "/assets/typescript.png",
+      },
+    ],
+  },
+  {
+    title: "A film & Architect portfolio",
+    desc: "A film and architecture portfolio is a platform designed to showcase a person's work in the film and architecture industries. It provides a space to display projects, skills, and credentials, and often includes a blog or news section to keep the audience informed about the latest trends and developments in the field. The portfolio may also include a contact form to allow potential clients or employers to get in touch with the filmmaker or architect.",
     subdesc:
       "Built with the MERN stack (MongoDB, Express, React, Node.js) and TypeScript, the app features a rich text editor (React Quill) for customized terms, product management, and dynamic template selection with a responsive Tailwind CSS interface.",
     //git: "https://github.com/sijo07/techzonQuotations.git",

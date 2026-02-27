@@ -1,7 +1,8 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { lazy, Suspense } from "react";
+import { HelmetProvider } from "react-helmet-async";
 import { Header, Hero } from "./sections";
-import { Cursor, Loader, ErrorBoundary, ScrollHandler } from "./components";
+import { Cursor, Loader, ErrorBoundary, ScrollHandler, SEO } from "./components";
 
 const ProjectsPage = lazy(() => import("./pages/ProjectsPage"));
 const ProjectDetailsPage = lazy(() => import("./pages/ProjectDetailsPage"));
@@ -15,6 +16,13 @@ const Footer = lazy(() => import("./sections/footer"));
 
 const Home = () => (
   <div className="relative z-0 bg-primary">
+    <SEO
+      title="Home"
+      description="Clement Sijo - Full Stack Developer specializing in React, Node.js, and modern web technologies. Building interactive digital experiences."
+      name="@clementsijo"
+      type="website"
+      image="/assets/profile.png"
+    />
     <div className="bg-hero-pattern bg-cover bg-no-repeat bg-center">
       <Header />
       <Cursor />
@@ -32,19 +40,21 @@ const Home = () => (
 
 function App() {
   return (
-    <ErrorBoundary>
-      <BrowserRouter>
-        <ScrollHandler />
-        <Suspense fallback={<Loader />}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/projects" element={<ProjectsPage />} />
-            <Route path="/projects/:id" element={<ProjectDetailsPage />} />
-            <Route path="*" element={<NotFoundPage />} />
-          </Routes>
-        </Suspense>
-      </BrowserRouter>
-    </ErrorBoundary>
+    <HelmetProvider>
+      <ErrorBoundary>
+        <BrowserRouter>
+          <ScrollHandler />
+          <Suspense fallback={<Loader />}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/projects" element={<ProjectsPage />} />
+              <Route path="/projects/:id" element={<ProjectDetailsPage />} />
+              <Route path="*" element={<NotFoundPage />} />
+            </Routes>
+          </Suspense>
+        </BrowserRouter>
+      </ErrorBoundary>
+    </HelmetProvider>
   );
 }
 

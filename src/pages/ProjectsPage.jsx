@@ -1,5 +1,5 @@
 import { Header } from "../sections";
-import { Cursor, AnimatedUnderline, AnimatedBackground } from "../components";
+import { Cursor, AnimatedUnderline, AnimatedBackground, SEO } from "../components";
 import { myProjects } from "../constants";
 import { GrGithub } from "react-icons/gr";
 import { FaLink, FaLaptopCode } from "react-icons/fa";
@@ -154,6 +154,13 @@ const ProjectsPage = () => {
 
     return (
         <div className="relative z-0 bg-black min-h-screen flex flex-col justify-between overflow-x-hidden">
+            <SEO
+                title="Projects"
+                description="Explore my portfolio of web applications, cybersecurity tools, and full-stack projects built with modern technologies."
+                name="@clementsijo"
+                type="website"
+                image="/assets/profile.png"
+            />
             <AnimatedBackground className="absolute inset-0 -z-10" />
 
             <Header />
